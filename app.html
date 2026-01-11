@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Utilities</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Auth check - redirect to login if not authenticated
+        if (localStorage.getItem('yoot-logged-in') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Email Utils</h1>
+                <button class="sidebar-toggle-top" onclick="toggleSidebar()">
+                    <span class="icon">◀</span>
+                </button>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-view="dashboard">
+                    <span class="icon">📊</span><span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-view="accounts">
+                    <span class="icon">📧</span><span class="nav-text">Accounts</span>
+                </a>
+                <a href="#" class="nav-item" data-view="inbox">
+                    <span class="icon">📥</span><span class="nav-text">Inbox</span>
+                </a>
+                <a href="#" class="nav-item" data-view="rules">
+                    <span class="icon">⚙️</span><span class="nav-text">Rules</span>
+                </a>
+                <a href="#" class="nav-item" data-view="lists">
+                    <span class="icon">📋</span><span class="nav-text">Lists</span>
+                </a>
+                <a href="#" class="nav-item" data-view="contacts">
+                    <span class="icon">👥</span><span class="nav-text">Contacts</span>
+                </a>
+                <a href="#" class="nav-item" data-view="analytics">
+                    <span class="icon">📈</span><span class="nav-text">Analytics</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h2 id="page-title">Dashboard</h2>
+                <div class="header-actions">
+                    <!-- Global Sync Indicator -->
+                    <div id="global-sync-indicator" class="global-sync-indicator hidden" onclick="switchView('analytics')">
+                        <span class="sync-spinner"></span>
+                        <span id="global-sync-text">Syncing...</span>
+                        <span id="global-sync-progress">0%</span>
+                    </div>
+                    <div class="user-switcher">
+                        <label for="user-select">User:</label>
+                        <select id="user-select" onchange="switchUser(this.value)">
+                            <option value="">Loading...</option>
+                        </select>
+                    </div>
+                    <div class="notification-bell" onclick="toggleNotifications()">
+                        <span class="icon">🔔</span>
+                        <span id="notification-badge" class="notification-badge hidden">0</span>
+                    </div>
+                    <div id="notification-dropdown" class="notification-dropdown hidden">
+                        <div class="notification-header">
+                            <span>Notifications</span>
+                            <button onclick="markAllNotificationsRead()">Mark all read</button>
+                        </div>
+                        <div id="notification-list" class="notification-list">
+                            <p class="empty-state">No notifications</p>
+                        </div>
+                    </div>
+                    <div class="user-info">
+                        <span id="user-email">Loading...</span>
+                        <button class="logout-btn" onclick="logout()" title="Sign Out">
+                            <span class="icon">&#x2192;</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="view active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Email Accounts</h3>
+                        <p class="stat-value" id="stat-accounts">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Active Rules</h3>
+                        <p class="stat-value" id="stat-rules">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Contacts</h3>
+                        <p class="stat-value" id="stat-contacts">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Blocked Senders</h3>
+                        <p class="stat-value" id="stat-blocked">0</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Recent Activity</h3>
+                    <div id="activity-list" class="activity-list">
+                        <p class="empty-state">No recent activity</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accounts View -->
+            <section id="view-accounts" class="view">
+                <div class="view-header">
+                    <h3>Email Accounts</h3>
+                    <button class="btn btn-primary" onclick="showAddAccountModal()">
+                        + Add Account
+                    </button>
+                </div>
+                <div id="accounts-list" class="accounts-list">
+                    <p class="empty-state">No email accounts configured</p>
+                </div>
+            </section>
+
+            <!-- Inbox View -->
+            <section id="view-inbox" class="view">
+                <div class="inbox-layout">
+                    <aside id="folder-sidebar" class="folder-sidebar">
+                        <select id="inbox-account-filter">
+                            <option value="all">All Accounts</option>
+                        </select>
+                        <h4>Folders</h4>
+                        <div id="folder-list" class="folder-list">
+                            <p class="empty-state">Select an account</p>
+                        </div>
+                    </aside>
+                    <div id="inbox-list" class="email-list">
+                        <p class="empty-state">Connect an email account to view your inbox</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rules View -->
+            <section id="view-rules" class="view">
+                <div class="view-header">
+                    <h3>Automation Rules</h3>
+                    <button class="btn btn-primary" onclick="showAddRuleModal()">
+                        + Create Rule
+                    </button>
+                </div>
+                <div id="rules-list" class="rules-list">
+                    <p class="empty-state">No rules configured</p>
+                </div>
+            </section>
+
+            <!-- Lists View -->
+            <section id="view-lists" class="view">
+                <div class="view-header">
+                    <h3>Email Lists</h3>
+                    <button class="btn btn-primary" onclick="showAddListModal()">
+                        + Create List
+                    </button>
+                </div>
+                <div class="lists-tabs">
+                    <button class="tab-btn active" data-list-type="WHITELIST">Whitelist</button>
+                    <button class="tab-btn" data-list-type="BLACKLIST">Blacklist</button>
+                    <button class="tab-btn" data-list-type="SPAM">Spam</button>
+                    <button class="tab-btn" data-list-type="UNSUBSCRIBE">Unsubscribe</button>
+                </div>
+                <div id="lists-content" class="lists-content">
+                    <p class="empty-state">No entries in this list</p>
+                </div>
+            </section>
+
+            <!-- Contacts View -->
+            <section id="view-contacts" class="view">
+                <div class="view-header">
+                    <h3>Contacts</h3>
+                    <button class="btn btn-primary" onclick="showAddContactListModal()">
+                        + Create List
+                    </button>
+                </div>
+                <div id="contact-lists" class="contact-lists">
+                    <p class="empty-state">No contact lists created</p>
+                </div>
+            </section>
+
+            <!-- Analytics View -->
+            <section id="view-analytics" class="view">
+                <div class="view-header">
+                    <h3>Email Analytics</h3>
+                    <div class="analytics-controls">
+                        <select id="analytics-days-filter">
+                            <option value="">All Time</option>
+                            <option value="7">Last 7 Days</option>
+                            <option value="30" selected>Last 30 Days</option>
+                            <option value="90">Last 90 Days</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                        <button id="sync-btn" class="btn btn-secondary" onclick="startBackgroundSync()">
+                            Sync Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sync Progress -->
+                <div id="sync-progress" class="sync-progress hidden">
+                    <div class="sync-progress-header">
+                        <span id="sync-status-text">Syncing...</span>
+                        <button id="sync-cancel-btn" class="btn btn-sm" onclick="cancelBackgroundSync()">Cancel</button>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="sync-progress-bar" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="sync-details">
+                        <span id="sync-current-account"></span>
+                        <span id="sync-stats"></span>
+                    </div>
+                </div>
+
+                <div id="analytics-loading" class="empty-state">
+                    <p>Loading analytics...</p>
+                </div>
+
+                <div id="analytics-content" class="analytics-content" style="display: none;">
+                    <!-- Summary Stats -->
+                    <div class="analytics-summary">
+                        <div class="stat-card">
+                            <h4>Total Emails</h4>
+                            <p class="stat-value" id="analytics-total">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Unread</h4>
+                            <p class="stat-value" id="analytics-unread">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Unique Senders</h4>
+                            <p class="stat-value" id="analytics-senders">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Read Rate</h4>
+                            <p class="stat-value" id="analytics-read-rate">0%</p>
+                        </div>
+                    </div>
+
+                    <!-- Spam Check Panel -->
+                    <div class="spam-check-panel">
+                        <div class="spam-check-header">
+                            <h4>🛡️ Spamhaus Check</h4>
+                            <button id="scan-spam-btn" class="btn btn-secondary" onclick="scanTopSendersForSpam()">
+                                Scan Top Senders
+                            </button>
+                        </div>
+                        <div id="spam-check-results" class="spam-check-results hidden">
+                            <div id="spam-check-summary"></div>
+                            <div id="spam-check-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bulk Actions Toolbar -->
+                    <div class="bulk-actions-toolbar">
+                        <button class="btn btn-sm" onclick="selectAllSenders()">Select All / None</button>
+                        <span id="bulk-select-info" class="bulk-select-info"></span>
+                        <div class="bulk-action-buttons">
+                            <button id="bulk-move-btn" class="btn btn-secondary" onclick="showMoveModal()" disabled>
+                                📁 Move Emails
+                            </button>
+                            <button id="bulk-segregate-btn" class="btn btn-secondary" onclick="showSegregateConfirm()" disabled>
+                                📂 Segregate by Sender
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Panels -->
+                    <div class="analytics-grid">
+                        <div class="analytics-panel">
+                            <h4>Top Senders</h4>
+                            <div id="analytics-top-senders" class="analytics-list"></div>
+                        </div>
+
+                        <div class="analytics-panel">
+                            <h4>Most Unread From</h4>
+                            <div id="analytics-unread-senders" class="analytics-list"></div>
+                        </div>
+
+                        <div class="analytics-panel">
+                            <h4>You Reply To Most</h4>
+                            <div id="analytics-reply-ranking" class="analytics-list"></div>
+                        </div>
+
+                        <div class="analytics-panel">
+                            <h4>Low Reply Rate (You Ignore)</h4>
+                            <div id="analytics-low-reply" class="analytics-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="modal-container hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modal-content" class="modal-content">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        // Auth utilities
+        function logout() {
+            localStorage.removeItem('yoot-user');
+            localStorage.removeItem('yoot-user-id');
+            localStorage.removeItem('yoot-logged-in');
+            localStorage.removeItem('emailutils-user-id');
+            window.location.href = 'login.html';
+        }
+
+        // Display logged in user
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('yoot-user') || '{}');
+            const userEmailEl = document.getElementById('user-email');
+            if (user.displayName) {
+                userEmailEl.textContent = user.displayName;
+            } else if (user.email) {
+                userEmailEl.textContent = user.email;
+            }
+        });
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>

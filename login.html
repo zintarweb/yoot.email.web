@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Yoot Email</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcFoEYsAAAAAAoVFYqSC5ZGErwtAMQh-XqnCJzB"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #fff;
+            transition: all 0.2s;
+        }
+
+        input::placeholder {
+            color: #64748b;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #e2e8f0;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* reCAPTCHA badge - positioned bottom right by default, hide and show notice instead */
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+
+        .recaptcha-notice {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-align: center;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .recaptcha-notice a {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">&#9993;</div>
+            <h1>Yoot Email</h1>
+            <p class="subtitle">Sign in to continue</p>
+        </div>
+
+        <div id="error-message" class="error-message"></div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn" id="login-btn">Sign In</button>
+        </form>
+
+        <p class="recaptcha-notice">
+            This site is protected by reCAPTCHA and the Google
+            <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and
+            <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
+        </p>
+
+        <a href="index.html" class="back-link">&larr; Back to home</a>
+    </div>
+
+    <script>
+        // reCAPTCHA v3 configuration
+        const RECAPTCHA_SITE_KEY = '6LcFoEYsAAAAAAoVFYqSC5ZGErwtAMQh-XqnCJzB';
+
+        const Auth = {
+            apiUrl: window.location.hostname === 'localhost' ? 'http://localhost:8080/api' : '/api',
+
+            async getRecaptchaToken() {
+                return new Promise((resolve, reject) => {
+                    // Skip reCAPTCHA on localhost
+                    if (window.location.hostname === 'localhost') {
+                        resolve(null);
+                        return;
+                    }
+                    if (typeof grecaptcha === 'undefined') {
+                        // reCAPTCHA not loaded, skip verification
+                        resolve(null);
+                        return;
+                    }
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'login' })
+                            .then(resolve)
+                            .catch(reject);
+                    });
+                });
+            },
+
+            async login(email, password) {
+                // Get reCAPTCHA token
+                let recaptchaToken = null;
+                try {
+                    recaptchaToken = await this.getRecaptchaToken();
+                } catch (e) {
+                    console.warn('reCAPTCHA failed:', e);
+                }
+
+                // Validate credentials via API (with reCAPTCHA token)
+                const authResponse = await fetch(`${this.apiUrl}/auth/validate`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email,
+                        password,
+                        recaptchaToken
+                    }),
+                });
+
+                const result = await authResponse.json();
+
+                if (result.valid) {
+                    return {
+                        id: result.userId,
+                        displayName: result.displayName,
+                        email: result.email
+                    };
+                }
+
+                throw new Error(result.message || 'Invalid email or password');
+            },
+
+            saveSession(user) {
+                localStorage.setItem('yoot-user', JSON.stringify(user));
+                localStorage.setItem('yoot-user-id', user.id.toString());
+                localStorage.setItem('emailutils-user-id', user.id.toString());
+                localStorage.setItem('yoot-logged-in', 'true');
+            },
+
+            isLoggedIn() {
+                return localStorage.getItem('yoot-logged-in') === 'true';
+            },
+
+            logout() {
+                localStorage.removeItem('yoot-user');
+                localStorage.removeItem('yoot-user-id');
+                localStorage.removeItem('yoot-logged-in');
+            },
+        };
+
+        // Check if already logged in
+        if (Auth.isLoggedIn()) {
+            window.location.href = 'app.html';
+        }
+
+        // Handle form submission
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('login-btn');
+            const errorEl = document.getElementById('error-message');
+
+            // Clear previous errors
+            errorEl.classList.remove('show');
+
+            // Disable button and show loading
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span>Verifying...';
+
+            try {
+                const user = await Auth.login(email, password);
+                Auth.saveSession(user);
+                window.location.href = 'app.html';
+            } catch (error) {
+                errorEl.textContent = error.message;
+                errorEl.classList.add('show');
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
+            }
+        });
+    </script>
+</body>
+</html>
