@@ -1,0 +1,249 @@
+/**
+ * Performance Utilities
+ *
+ * CSS optimizations for better rendering performance
+ */
+
+/* ==========================================================================
+   GPU ACCELERATION
+   ========================================================================== */
+
+/* Force GPU acceleration for animated elements */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Use sparingly - only for elements that will animate */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+/* Remove will-change after animation */
+.animation-complete {
+  will-change: auto;
+}
+
+/* ==========================================================================
+   CONTENT VISIBILITY
+   ========================================================================== */
+
+/* Skip rendering of off-screen content */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px; /* Fallback size estimate */
+}
+
+/* For large lists - render only visible items */
+.virtual-scroll-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 64px;
+}
+
+/* ==========================================================================
+   CONTAINMENT
+   ========================================================================== */
+
+/* Isolate layout calculations */
+.contain-layout {
+  contain: layout;
+}
+
+/* Isolate paint operations */
+.contain-paint {
+  contain: paint;
+}
+
+/* Full containment for independent widgets */
+.contain-strict {
+  contain: strict;
+}
+
+/* Content containment for cards/panels */
+.contain-content {
+  contain: content;
+}
+
+/* ==========================================================================
+   LAZY LOADING
+   ========================================================================== */
+
+/* Placeholder for lazy-loaded images */
+.lazy-image {
+  background-color: var(--color-gray-200);
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.lazy-image.loaded {
+  background-color: transparent;
+}
+
+.lazy-image:not(.loaded) img {
+  opacity: 0;
+}
+
+.lazy-image.loaded img {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   FONT LOADING
+   ========================================================================== */
+
+/* Prevent layout shift during font loading */
+.font-loading {
+  font-synthesis: none;
+}
+
+/* Show fallback immediately, then swap */
+.font-swap {
+  font-display: swap;
+}
+
+/* ==========================================================================
+   SCROLL PERFORMANCE
+   ========================================================================== */
+
+/* Optimize scrolling containers */
+.scroll-container {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent scroll chaining */
+.scroll-isolated {
+  overscroll-behavior: none;
+}
+
+/* Smooth scrolling (respects reduced motion) */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smooth-scroll {
+    scroll-behavior: auto;
+  }
+}
+
+/* ==========================================================================
+   IMAGE OPTIMIZATION
+   ========================================================================== */
+
+/* Responsive images */
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Contain images within bounds */
+.img-cover {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.img-contain {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+/* Async image decoding */
+img[decoding="async"] {
+  content-visibility: auto;
+}
+
+/* ==========================================================================
+   PRINT OPTIMIZATIONS
+   ========================================================================== */
+
+@media print {
+  /* Hide non-essential elements */
+  .no-print,
+  .sidebar,
+  .header,
+  .toast-container,
+  .modal-container {
+    display: none !important;
+  }
+
+  /* Optimize for print */
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+
+  /* Page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   CRITICAL CSS MARKERS
+   ========================================================================== */
+
+/* Mark above-the-fold content for critical CSS extraction */
+.critical {
+  /* Marker class - styles for these elements should be inlined */
+}
+
+/* Mark non-critical content for deferred loading */
+.deferred {
+  /* Marker class - styles can be loaded async */
+}
+
+/* ==========================================================================
+   PREFERS DATA SAVER
+   ========================================================================== */
+
+@media (prefers-reduced-data: reduce) {
+  /* Disable background images */
+  .bg-image {
+    background-image: none !important;
+  }
+
+  /* Disable non-essential animations */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Hide decorative images */
+  img[role="presentation"],
+  img.decorative {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   RENDER HINTS
+   ========================================================================== */
+
+/* Hint that element will be visible soon */
+.prefetch-visible {
+  content-visibility: visible;
+}
+
+/* Hint that element is interactive */
+.prefetch-interactive {
+  pointer-events: auto;
+  touch-action: manipulation;
+}

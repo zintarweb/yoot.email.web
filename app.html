@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Utilities</title>
+    <meta name="theme-color" content="#ffffff">
+    <title>Email Utilities - Yoot</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/style.css">
     <script>
         // Auth check - redirect to login if not authenticated
@@ -12,14 +17,732 @@
             window.location.href = 'login.html';
         }
     </script>
+    <style>
+        /* App-specific overrides to bridge old styles with new design system */
+
+        /* Override old sidebar with new app shell */
+        #app {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--color-bg-primary);
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background-color: var(--color-bg-secondary);
+            border-right: var(--border-1) solid var(--color-border-secondary);
+            display: flex;
+            flex-direction: column;
+            transition: width var(--duration-normal) var(--ease-in-out);
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        #app.sidebar-collapsed .sidebar {
+            width: var(--sidebar-width-collapsed);
+        }
+
+        .sidebar .logo {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-4);
+            border-bottom: var(--border-1) solid var(--color-border-secondary);
+        }
+
+        .sidebar .logo h1 {
+            font-size: var(--text-lg);
+            font-weight: var(--font-bold);
+            color: var(--color-text-primary);
+            white-space: nowrap;
+            transition: opacity var(--duration-normal) var(--ease-in-out);
+        }
+
+        #app.sidebar-collapsed .sidebar .logo h1 {
+            opacity: 0;
+            width: 0;
+        }
+
+        .sidebar-toggle-top {
+            background: none;
+            border: none;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            padding: var(--space-2);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-button);
+        }
+
+        .sidebar-toggle-top:hover {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-text-primary);
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: var(--space-4) var(--space-2);
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-2-5) var(--space-3);
+            margin-bottom: var(--space-1);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition:
+                background-color var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out),
+                transform var(--duration-fast) var(--ease-out);
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-text-primary);
+            transform: translateX(4px);
+        }
+
+        .nav-item.active {
+            background-color: var(--color-bg-brand-subtle);
+            color: var(--color-brand-700);
+        }
+
+        .nav-item.active:hover {
+            transform: none;
+        }
+
+        .nav-item .icon {
+            transition: transform var(--duration-fast) var(--ease-out);
+        }
+
+        .nav-item:hover .icon {
+            transform: scale(1.15);
+        }
+
+        .nav-item .icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .nav-item .nav-text {
+            transition: opacity var(--duration-normal) var(--ease-in-out);
+        }
+
+        #app.sidebar-collapsed .nav-item .nav-text {
+            opacity: 0;
+            width: 0;
+        }
+
+        /* Main content - uses margin-left from style.css */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+            margin-left: var(--sidebar-width);
+            transition: margin-left var(--duration-normal) var(--ease-in-out);
+        }
+
+        #app.sidebar-collapsed .main-content {
+            margin-left: var(--sidebar-width-collapsed);
+        }
+
+        .header {
+            height: var(--header-height);
+            background-color: var(--color-bg-secondary);
+            border-bottom: var(--border-1) solid var(--color-border-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-6);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .header h2 {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            color: var(--color-text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        /* User switcher */
+        .user-switcher {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .user-switcher label {
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .user-switcher select {
+            padding: var(--space-1-5) var(--space-3);
+            background-color: var(--color-bg-secondary);
+            border: var(--border-1) solid var(--color-border-primary);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            cursor: pointer;
+        }
+
+        /* Notification bell */
+        .notification-bell {
+            position: relative;
+            padding: var(--space-2);
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-button);
+        }
+
+        .notification-bell:hover {
+            background-color: var(--color-bg-tertiary);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 var(--space-1);
+            font-size: var(--text-xs);
+            font-weight: var(--font-bold);
+            background-color: var(--color-danger-500);
+            color: var(--color-text-inverse);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* User info */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-1-5) var(--space-3);
+            border: var(--border-1) solid var(--color-border-secondary);
+            border-radius: var(--radius-full);
+        }
+
+        .user-info #user-email {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--color-text-primary);
+        }
+
+        .logout-btn {
+            padding: var(--space-1);
+            background: none;
+            border: none;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: var(--transition-button);
+        }
+
+        .logout-btn:hover {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-danger-600);
+        }
+
+        /* Theme toggle in header */
+        .theme-toggle {
+            padding: var(--space-2);
+            background: none;
+            border: none;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-button);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-text-primary);
+        }
+
+        /* Views */
+        .view {
+            flex: 1;
+            padding: var(--space-6);
+            overflow-y: auto;
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .stat-card {
+            background-color: var(--color-bg-secondary);
+            border: var(--border-1) solid var(--color-border-secondary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-sm);
+            transition:
+                transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-brand-200);
+        }
+
+        .stat-card h3,
+        .stat-card h4 {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-2);
+        }
+
+        .stat-value {
+            font-size: var(--text-3xl);
+            font-weight: var(--font-bold);
+            color: var(--color-text-primary);
+        }
+
+        /* Section */
+        .section {
+            background-color: var(--color-bg-secondary);
+            border: var(--border-1) solid var(--color-border-secondary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-sm);
+            transition:
+                transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .section h3 {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-4);
+        }
+
+        /* View header - actions only, title is in main header */
+        .view-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition-button);
+            border: var(--border-1) solid transparent;
+        }
+
+        .btn-primary,
+        .btn.btn-primary {
+            background-color: var(--color-brand-600);
+            color: var(--color-text-inverse);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-brand-700);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md), 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary,
+        .btn.btn-secondary {
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            border-color: var(--color-border-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-bg-tertiary);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        .btn-sm {
+            padding: var(--space-1) var(--space-2);
+            font-size: var(--text-xs);
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-8);
+            color: var(--color-text-tertiary);
+        }
+
+        /* Global sync indicator */
+        .global-sync-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--gradient-brand);
+            color: var(--color-text-inverse);
+            border-radius: var(--radius-full);
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+
+        .global-sync-indicator .sync-spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin var(--duration-700) linear infinite;
+        }
+
+        /* Tabs */
+        .lists-tabs {
+            display: flex;
+            gap: var(--space-1);
+            margin-bottom: var(--space-4);
+            border-bottom: var(--border-1) solid var(--color-border-secondary);
+            padding-bottom: var(--space-1);
+        }
+
+        .tab-btn {
+            padding: var(--space-2) var(--space-4);
+            background: none;
+            border: none;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            transition: var(--transition-button);
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: var(--color-text-primary);
+            background-color: var(--color-bg-tertiary);
+        }
+
+        .tab-btn.active {
+            color: var(--color-brand-600);
+        }
+
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--color-brand-600);
+            border-radius: var(--radius-full);
+        }
+
+        /* Analytics grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        @media (max-width: 1024px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .analytics-panel {
+            background-color: var(--color-bg-secondary);
+            border: var(--border-1) solid var(--color-border-secondary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            transition:
+                transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+        }
+
+        .analytics-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .analytics-panel h4 {
+            font-size: var(--text-base);
+            font-weight: var(--font-semibold);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-4);
+        }
+
+        /* View entrance animation */
+        .view.active {
+            animation: viewFadeIn var(--duration-normal) var(--ease-out);
+        }
+
+        @keyframes viewFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-left: 0;
+            }
+
+            #app.sidebar-collapsed .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                box-shadow: var(--shadow-2xl);
+                transition: transform var(--duration-normal) var(--ease-out);
+                z-index: 200;
+            }
+
+            #app.sidebar-open .sidebar {
+                transform: translateX(0);
+            }
+
+            #app.sidebar-collapsed .sidebar {
+                width: var(--sidebar-width);
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 0 var(--space-4);
+            }
+
+            .header-actions {
+                gap: var(--space-2);
+            }
+
+            .user-switcher,
+            .user-info #user-email {
+                display: none;
+            }
+
+            .view {
+                padding: var(--space-4);
+            }
+        }
+
+        /* Modal improvements */
+        .modal-container {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+            background-color: var(--color-overlay-backdrop);
+        }
+
+        .modal {
+            background-color: var(--color-bg-secondary);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
+            max-width: 560px;
+            width: 100%;
+            max-height: calc(100vh - var(--space-8));
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4) var(--space-5);
+            border-bottom: var(--border-1) solid var(--color-border-secondary);
+        }
+
+        .modal-header h3 {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--color-text-primary);
+        }
+
+        .modal-close {
+            padding: var(--space-2);
+            background: none;
+            border: none;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            font-size: var(--text-xl);
+            line-height: 1;
+            transition: var(--transition-button);
+        }
+
+        .modal-close:hover {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-text-primary);
+        }
+
+        .modal-content {
+            padding: var(--space-5);
+            overflow-y: auto;
+        }
+
+        /* Hidden utility */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            padding: var(--space-2);
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            transition: var(--transition-button);
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: var(--color-bg-tertiary);
+            color: var(--color-text-primary);
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-in-out);
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .sidebar-overlay {
+                display: block;
+                pointer-events: none;
+            }
+
+            #app.sidebar-open .sidebar-overlay {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            #app.sidebar-open .sidebar {
+                transform: translateX(0);
+            }
+        }
+
+        /* Page title mobile */
+        @media (max-width: 640px) {
+            .header h2 {
+                font-size: var(--text-lg);
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Live Region for Screen Reader Announcements -->
+    <div id="live-region" class="live-region" aria-live="polite" aria-atomic="true"></div>
+
     <div id="app">
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" onclick="closeMobileMenu()" aria-hidden="true"></div>
+
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" role="navigation" aria-label="Main navigation">
             <div class="logo">
-                <h1>Email Utils</h1>
-                <button class="sidebar-toggle-top" onclick="toggleSidebar()">
+                <h1>&#9993; Yoot</h1>
+                <button class="sidebar-toggle-top" onclick="toggleSidebar()" title="Toggle sidebar">
                     <span class="icon">◀</span>
                 </button>
             </div>
@@ -51,7 +774,14 @@
         <!-- Main Content -->
         <main class="main-content">
             <header class="header">
-                <h2 id="page-title">Dashboard</h2>
+                <div class="header-left">
+                    <button class="mobile-menu-btn" onclick="openMobileMenu()" title="Open menu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12h18M3 6h18M3 18h18"/>
+                        </svg>
+                    </button>
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
                 <div class="header-actions">
                     <!-- Global Sync Indicator -->
                     <div id="global-sync-indicator" class="global-sync-indicator hidden" onclick="switchView('analytics')">
@@ -59,6 +789,12 @@
                         <span id="global-sync-text">Syncing...</span>
                         <span id="global-sync-progress">0%</span>
                     </div>
+
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle" onclick="ThemeManager.toggle()" title="Toggle theme">
+                        <span class="icon">🌙</span>
+                    </button>
+
                     <div class="user-switcher">
                         <label for="user-select">User:</label>
                         <select id="user-select" onchange="switchUser(this.value)">
@@ -88,7 +824,7 @@
             </header>
 
             <!-- Dashboard View -->
-            <section id="view-dashboard" class="view active">
+            <section id="view-dashboard" class="view active" id="main-content" role="main" aria-label="Dashboard">
                 <div class="stats-grid">
                     <div class="stat-card">
                         <h3>Email Accounts</h3>
@@ -119,7 +855,6 @@
             <!-- Accounts View -->
             <section id="view-accounts" class="view">
                 <div class="view-header">
-                    <h3>Email Accounts</h3>
                     <button class="btn btn-primary" onclick="showAddAccountModal()">
                         + Add Account
                     </button>
@@ -150,7 +885,6 @@
             <!-- Rules View -->
             <section id="view-rules" class="view">
                 <div class="view-header">
-                    <h3>Automation Rules</h3>
                     <button class="btn btn-primary" onclick="showAddRuleModal()">
                         + Create Rule
                     </button>
@@ -163,7 +897,6 @@
             <!-- Lists View -->
             <section id="view-lists" class="view">
                 <div class="view-header">
-                    <h3>Email Lists</h3>
                     <button class="btn btn-primary" onclick="showAddListModal()">
                         + Create List
                     </button>
@@ -182,7 +915,6 @@
             <!-- Contacts View -->
             <section id="view-contacts" class="view">
                 <div class="view-header">
-                    <h3>Contacts</h3>
                     <button class="btn btn-primary" onclick="showAddContactListModal()">
                         + Create List
                     </button>
@@ -195,7 +927,6 @@
             <!-- Analytics View -->
             <section id="view-analytics" class="view">
                 <div class="view-header">
-                    <h3>Email Analytics</h3>
                     <div class="analytics-controls">
                         <select id="analytics-days-filter">
                             <option value="">All Time</option>
@@ -231,7 +962,7 @@
 
                 <div id="analytics-content" class="analytics-content" style="display: none;">
                     <!-- Summary Stats -->
-                    <div class="analytics-summary">
+                    <div class="analytics-summary stats-grid">
                         <div class="stat-card">
                             <h4>Total Emails</h4>
                             <p class="stat-value" id="analytics-total">0</p>
@@ -251,9 +982,9 @@
                     </div>
 
                     <!-- Spam Check Panel -->
-                    <div class="spam-check-panel">
-                        <div class="spam-check-header">
-                            <h4>🛡️ Spamhaus Check</h4>
+                    <div class="spam-check-panel section" style="margin: var(--space-5) 0;">
+                        <div class="spam-check-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                            <h4 style="margin: 0;">🛡️ Spamhaus Check</h4>
                             <button id="scan-spam-btn" class="btn btn-secondary" onclick="scanTopSendersForSpam()">
                                 Scan Top Senders
                             </button>
@@ -265,10 +996,10 @@
                     </div>
 
                     <!-- Bulk Actions Toolbar -->
-                    <div class="bulk-actions-toolbar">
-                        <button class="btn btn-sm" onclick="selectAllSenders()">Select All / None</button>
-                        <span id="bulk-select-info" class="bulk-select-info"></span>
-                        <div class="bulk-action-buttons">
+                    <div class="bulk-actions-toolbar section" style="margin-bottom: var(--space-5); display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;">
+                        <button class="btn btn-sm btn-secondary" onclick="selectAllSenders()">Select All / None</button>
+                        <span id="bulk-select-info" class="bulk-select-info" style="font-size: var(--text-sm); color: var(--color-text-secondary);"></span>
+                        <div class="bulk-action-buttons" style="display: flex; gap: var(--space-2); margin-left: auto;">
                             <button id="bulk-move-btn" class="btn btn-secondary" onclick="showMoveModal()" disabled>
                                 📁 Move Emails
                             </button>
@@ -318,15 +1049,86 @@
         </div>
     </div>
 
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container toast-container--top-right"></div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/theme-config.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/loading.js"></script>
     <script src="js/api.js"></script>
     <script>
+        // Initialize toast
+        Toast.init({ position: 'top-right' });
+
+        // Initialize loading states for dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show skeleton for stats while loading
+            const statsGrid = document.querySelector('.stats-grid');
+            const activityList = document.getElementById('activity-list');
+
+            if (statsGrid) {
+                Loading.show(statsGrid, { type: 'stats', count: 4 });
+            }
+            if (activityList) {
+                Loading.show(activityList, { type: 'list', count: 3 });
+            }
+        });
+
         // Auth utilities
         function logout() {
             localStorage.removeItem('yoot-user');
             localStorage.removeItem('yoot-user-id');
             localStorage.removeItem('yoot-logged-in');
             localStorage.removeItem('emailutils-user-id');
-            window.location.href = 'login.html';
+            Toast.info('Signed out successfully');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 500);
+        }
+
+        // Sidebar toggle
+        function toggleSidebar() {
+            const app = document.getElementById('app');
+            app.classList.toggle('sidebar-collapsed');
+            const btn = document.querySelector('.sidebar-toggle-top .icon');
+            btn.textContent = app.classList.contains('sidebar-collapsed') ? '▶' : '◀';
+            localStorage.setItem('emailutils-sidebar-collapsed', app.classList.contains('sidebar-collapsed'));
+        }
+
+        // Mobile menu functions
+        function openMobileMenu() {
+            const app = document.getElementById('app');
+            app.classList.add('sidebar-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            const app = document.getElementById('app');
+            app.classList.remove('sidebar-open');
+            document.body.style.overflow = '';
+        }
+
+        // Close mobile menu on nav item click
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    closeMobileMenu();
+                }
+            });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+
+        // Restore sidebar state (desktop only)
+        if (localStorage.getItem('emailutils-sidebar-collapsed') === 'true' && window.innerWidth > 1024) {
+            document.getElementById('app').classList.add('sidebar-collapsed');
+            document.querySelector('.sidebar-toggle-top .icon').textContent = '▶';
         }
 
         // Display logged in user
@@ -338,6 +1140,43 @@
             } else if (user.email) {
                 userEmailEl.textContent = user.email;
             }
+        });
+
+        // Listen for theme changes to update icon
+        window.addEventListener('themechange', (e) => {
+            const themeToggle = document.querySelector('.theme-toggle .icon');
+            if (themeToggle) {
+                themeToggle.textContent = e.detail.theme === 'dark' ? '☀️' : '🌙';
+            }
+        });
+
+        // Set initial theme icon
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.querySelector('.theme-toggle .icon');
+            if (themeToggle && ThemeManager.isDark()) {
+                themeToggle.textContent = '☀️';
+            }
+        });
+
+        // Accessibility: Announce to screen readers
+        function announce(message, priority = 'polite') {
+            const liveRegion = document.getElementById('live-region');
+            if (liveRegion) {
+                liveRegion.setAttribute('aria-live', priority);
+                liveRegion.textContent = message;
+                // Clear after announcement
+                setTimeout(() => {
+                    liveRegion.textContent = '';
+                }, 1000);
+            }
+        }
+
+        // Announce view changes to screen readers
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const viewName = this.querySelector('.nav-text')?.textContent || 'View';
+                setTimeout(() => announce(`Navigated to ${viewName}`), 100);
+            });
         });
     </script>
     <script src="js/app.js"></script>

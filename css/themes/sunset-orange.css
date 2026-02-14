@@ -1,0 +1,62 @@
+/**
+ * Sunset Orange Theme
+ *
+ * A warm, energetic orange theme perfect for creative,
+ * marketing, or entertainment applications.
+ *
+ * Usage:
+ * <link rel="stylesheet" href="css/themes/sunset-orange.css">
+ */
+
+:root {
+  /* Brand Colors - Sunset Orange */
+  --color-brand-50: #fff7ed;
+  --color-brand-100: #ffedd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fdba74;
+  --color-brand-400: #fb923c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+  --color-brand-800: #9a3412;
+  --color-brand-900: #7c2d12;
+
+  /* Accent - Rose */
+  --color-accent-500: #f43f5e;
+  --color-accent-600: #e11d48;
+
+  /* Semantic Brand Mappings */
+  --color-interactive-primary: var(--color-brand-500);
+  --color-interactive-hover: var(--color-brand-600);
+  --color-interactive-active: var(--color-brand-700);
+
+  --color-bg-brand-subtle: var(--color-brand-50);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-400) 0%, var(--color-accent-500) 100%);
+  --gradient-dark: linear-gradient(180deg, #7c2d12 0%, #450a0a 100%);
+
+  /* Component Adjustments - Playful/Rounded */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+
+  /* Slightly more prominent shadows */
+  --shadow-sm: 0 2px 4px 0 rgb(0 0 0 / 0.08);
+  --shadow-md: 0 4px 8px -1px rgb(0 0 0 / 0.12);
+  --shadow-lg: 0 12px 20px -4px rgb(0 0 0 / 0.12);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  --color-brand-50: #431407;
+  --color-brand-100: #7c2d12;
+  --color-brand-200: #9a3412;
+  --color-brand-300: #c2410c;
+  --color-brand-400: #ea580c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #fb923c;
+  --color-brand-700: #fdba74;
+}

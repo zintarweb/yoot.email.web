@@ -1,0 +1,103 @@
+/**
+ * yoot.email Design System
+ *
+ * Main CSS entry point - imports all design system modules
+ *
+ * Import order:
+ * 1. Tokens (design system foundation)
+ * 2. Base styles (reset, typography)
+ * 3. Layouts (app shell, grid, containers)
+ * 4. Components (UI components)
+ * 5. Themes (light/dark mode)
+ * 6. Utilities (helper classes)
+ */
+
+/* ==========================================================================
+   1. DESIGN TOKENS
+   Foundation of the design system - colors, spacing, typography, etc.
+   ========================================================================== */
+
+@import 'tokens/_colors.css';
+@import 'tokens/_typography.css';
+@import 'tokens/_spacing.css';
+@import 'tokens/_shadows.css';
+@import 'tokens/_borders.css';
+@import 'tokens/_animations.css';
+@import 'tokens/_breakpoints.css';
+
+/* ==========================================================================
+   2. BASE STYLES
+   CSS reset and base element styles
+   ========================================================================== */
+
+@import 'base/_reset.css';
+@import 'base/_typography.css';
+
+/* ==========================================================================
+   3. LAYOUTS
+   Page structure and layout patterns
+   ========================================================================== */
+
+@import 'layouts/_app-shell.css';
+@import 'layouts/_grid.css';
+@import 'layouts/_container.css';
+
+/* ==========================================================================
+   4. COMPONENTS
+   Reusable UI components
+   ========================================================================== */
+
+@import 'components/_button.css';
+@import 'components/_card.css';
+@import 'components/_input.css';
+@import 'components/_select.css';
+@import 'components/_checkbox.css';
+@import 'components/_toggle.css';
+@import 'components/_modal.css';
+@import 'components/_table.css';
+@import 'components/_badge.css';
+@import 'components/_avatar.css';
+@import 'components/_dropdown.css';
+@import 'components/_tabs.css';
+@import 'components/_pagination.css';
+@import 'components/_toast.css';
+@import 'components/_skeleton.css';
+@import 'components/_tooltip.css';
+@import 'components/_progress.css';
+
+/* ==========================================================================
+   5. THEMES
+   Color scheme variations (light/dark)
+   ========================================================================== */
+
+@import 'themes/default.css';
+@import 'themes/dark.css';
+
+/* ==========================================================================
+   6. UTILITIES
+   Helper and utility classes
+   ========================================================================== */
+
+@import 'utilities/_helpers.css';
+@import 'utilities/_interactions.css';
+@import 'utilities/_accessibility.css';
+@import 'utilities/_performance.css';
+
+/* ==========================================================================
+   7. VIEWS
+   Page-specific styles
+   ========================================================================== */
+
+@import 'views/_dashboard.css';
+@import 'views/_inbox.css';
+@import 'views/_accounts.css';
+@import 'views/_rules.css';
+@import 'views/_analytics.css';
+
+/* ==========================================================================
+   8. CUSTOM/WHITE-LABEL (Optional)
+   Import client-specific theme overrides here
+
+   Example:
+   @import 'themes/client-name.css';
+   ========================================================================== */

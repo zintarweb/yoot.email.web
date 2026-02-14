@@ -1,0 +1,205 @@
+/**
+ * Dark Theme
+ *
+ * Override semantic color mappings for dark mode
+ */
+
+/* ==========================================================================
+   DARK MODE
+   Applied via data-theme="dark" attribute on html element
+   ========================================================================== */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --color-bg-primary: var(--color-gray-900);
+  --color-bg-secondary: var(--color-gray-800);
+  --color-bg-tertiary: var(--color-gray-700);
+  --color-bg-quaternary: var(--color-gray-600);
+  --color-bg-inverse: var(--color-gray-50);
+  --color-bg-brand: var(--color-brand-500);
+  --color-bg-brand-subtle: rgba(37, 99, 235, 0.15);
+  --color-bg-success: rgba(34, 197, 94, 0.15);
+  --color-bg-warning: rgba(245, 158, 11, 0.15);
+  --color-bg-danger: rgba(239, 68, 68, 0.15);
+  --color-bg-info: rgba(6, 182, 212, 0.15);
+
+  /* Text - improved contrast for dark mode */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e2e8f0;
+  --color-text-tertiary: #cbd5e1;
+  --color-text-quaternary: #94a3b8;
+  --color-text-inverse: var(--color-gray-900);
+  --color-text-brand: var(--color-brand-400);
+  --color-text-success: var(--color-success-400);
+  --color-text-warning: var(--color-warning-400);
+  --color-text-danger: var(--color-danger-400);
+  --color-text-info: var(--color-info-400);
+  --color-text-link: var(--color-brand-400);
+  --color-text-link-hover: var(--color-brand-300);
+
+  /* Borders */
+  --color-border-primary: var(--color-gray-700);
+  --color-border-secondary: var(--color-gray-800);
+  --color-border-tertiary: var(--color-gray-600);
+  --color-border-focus: var(--color-brand-400);
+
+  /* Interactive */
+  --color-interactive-primary: var(--color-brand-500);
+  --color-interactive-primary-hover: var(--color-brand-400);
+  --color-interactive-primary-active: var(--color-brand-600);
+  --color-interactive-secondary: var(--color-gray-700);
+  --color-interactive-secondary-hover: var(--color-gray-600);
+  --color-interactive-secondary-active: var(--color-gray-500);
+
+  /* Focus Ring */
+  --color-focus-ring: rgba(59, 130, 246, 0.4);
+  --color-focus-ring-danger: rgba(239, 68, 68, 0.4);
+
+  /* Overlays */
+  --color-overlay-light: rgba(255, 255, 255, 0.1);
+  --color-overlay-dark: rgba(0, 0, 0, 0.6);
+  --color-overlay-backdrop: rgba(0, 0, 0, 0.75);
+
+  /* Shadows - deeper for dark mode */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+  --shadow-sm:
+    0 1px 3px 0 rgb(0 0 0 / 0.3),
+    0 1px 2px -1px rgb(0 0 0 / 0.2);
+  --shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.4),
+    0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.5),
+    0 4px 6px -4px rgb(0 0 0 / 0.4);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.6),
+    0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.7);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-400) 0%, var(--color-brand-600) 100%);
+  --gradient-surface: linear-gradient(180deg, var(--color-gray-800) 0%, var(--color-gray-900) 100%);
+}
+
+/* ==========================================================================
+   AUTO DARK MODE
+   Respects system preference when no explicit theme is set
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    /* Backgrounds */
+    --color-bg-primary: var(--color-gray-900);
+    --color-bg-secondary: var(--color-gray-800);
+    --color-bg-tertiary: var(--color-gray-700);
+    --color-bg-quaternary: var(--color-gray-600);
+    --color-bg-inverse: var(--color-gray-50);
+    --color-bg-brand: var(--color-brand-500);
+    --color-bg-brand-subtle: rgba(37, 99, 235, 0.15);
+    --color-bg-success: rgba(34, 197, 94, 0.15);
+    --color-bg-warning: rgba(245, 158, 11, 0.15);
+    --color-bg-danger: rgba(239, 68, 68, 0.15);
+    --color-bg-info: rgba(6, 182, 212, 0.15);
+
+    /* Text - improved contrast for dark mode */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #e2e8f0;
+    --color-text-tertiary: #cbd5e1;
+    --color-text-quaternary: #94a3b8;
+    --color-text-inverse: var(--color-gray-900);
+    --color-text-brand: var(--color-brand-400);
+    --color-text-success: var(--color-success-400);
+    --color-text-warning: var(--color-warning-400);
+    --color-text-danger: var(--color-danger-400);
+    --color-text-info: var(--color-info-400);
+    --color-text-link: var(--color-brand-400);
+    --color-text-link-hover: var(--color-brand-300);
+
+    /* Borders */
+    --color-border-primary: var(--color-gray-700);
+    --color-border-secondary: var(--color-gray-800);
+    --color-border-tertiary: var(--color-gray-600);
+    --color-border-focus: var(--color-brand-400);
+
+    /* Interactive */
+    --color-interactive-primary: var(--color-brand-500);
+    --color-interactive-primary-hover: var(--color-brand-400);
+    --color-interactive-primary-active: var(--color-brand-600);
+    --color-interactive-secondary: var(--color-gray-700);
+    --color-interactive-secondary-hover: var(--color-gray-600);
+    --color-interactive-secondary-active: var(--color-gray-500);
+
+    /* Focus Ring */
+    --color-focus-ring: rgba(59, 130, 246, 0.4);
+    --color-focus-ring-danger: rgba(239, 68, 68, 0.4);
+
+    /* Overlays */
+    --color-overlay-light: rgba(255, 255, 255, 0.1);
+    --color-overlay-dark: rgba(0, 0, 0, 0.6);
+    --color-overlay-backdrop: rgba(0, 0, 0, 0.75);
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+    --shadow-sm:
+      0 1px 3px 0 rgb(0 0 0 / 0.3),
+      0 1px 2px -1px rgb(0 0 0 / 0.2);
+    --shadow-md:
+      0 4px 6px -1px rgb(0 0 0 / 0.4),
+      0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg:
+      0 10px 15px -3px rgb(0 0 0 / 0.5),
+      0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --shadow-xl:
+      0 20px 25px -5px rgb(0 0 0 / 0.6),
+      0 8px 10px -6px rgb(0 0 0 / 0.5);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.7);
+
+    /* Gradients */
+    --gradient-brand: linear-gradient(135deg, var(--color-brand-400) 0%, var(--color-brand-600) 100%);
+    --gradient-surface: linear-gradient(180deg, var(--color-gray-800) 0%, var(--color-gray-900) 100%);
+  }
+}
+
+/* ==========================================================================
+   DARK MODE COMPONENT OVERRIDES
+   ========================================================================== */
+
+/* Scrollbar styling for dark mode */
+[data-theme="dark"] * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-600) var(--color-gray-800);
+}
+
+[data-theme="dark"] *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="dark"] *::-webkit-scrollbar-track {
+  background: var(--color-gray-800);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="dark"] *::-webkit-scrollbar-thumb {
+  background: var(--color-gray-600);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="dark"] *::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-500);
+}
+
+/* Selection color */
+[data-theme="dark"] ::selection {
+  background-color: var(--color-brand-800);
+  color: var(--color-brand-100);
+}
+
+/* Images and media */
+[data-theme="dark"] img {
+  filter: brightness(0.95);
+}

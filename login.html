@@ -3,216 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f2937">
     <title>Login - Yoot Email</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
     <!-- reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LcFoEYsAAAAAAoVFYqSC5ZGErwtAMQh-XqnCJzB"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        /* Login page specific styles */
+        .login-page {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+            padding: var(--space-4);
         }
 
-        .login-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 3rem;
+        .login-page::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        }
+
+        .login-card {
+            position: relative;
+            z-index: 1;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-10);
+            box-shadow: var(--shadow-2xl);
         }
 
         .login-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: var(--space-8);
         }
 
-        .logo {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+        .login-logo {
+            font-size: 3.5rem;
+            margin-bottom: var(--space-3);
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
         }
 
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
+        .login-title {
+            font-size: var(--text-2xl);
+            font-weight: var(--font-semibold);
+            color: var(--color-gray-50);
+            margin-bottom: var(--space-1);
         }
 
-        .subtitle {
-            color: #94a3b8;
-            font-size: 0.9rem;
+        .login-subtitle {
+            color: var(--color-gray-400);
+            font-size: var(--text-sm);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        /* Form styles for dark glassmorphism */
+        .login-form .form-field {
+            margin-bottom: var(--space-5);
         }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: #e2e8f0;
+        .login-form .form-field__label {
+            color: var(--color-gray-300);
+            margin-bottom: var(--space-2);
         }
 
-        input {
-            width: 100%;
-            padding: 0.875rem 1rem;
+        .login-form .input {
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            font-size: 1rem;
-            color: #fff;
-            transition: all 0.2s;
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--color-gray-50);
+            padding: var(--space-3) var(--space-4);
         }
 
-        input::placeholder {
-            color: #64748b;
+        .login-form .input::placeholder {
+            color: var(--color-gray-500);
         }
 
-        input:focus {
-            outline: none;
-            border-color: #3b82f6;
+        .login-form .input:focus {
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            border-color: var(--color-brand-500);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
         }
 
-        .btn {
+        .login-btn {
             width: 100%;
-            padding: 0.875rem;
-            background: #3b82f6;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
+            padding: var(--space-3) var(--space-4);
+            background: var(--gradient-brand);
+            font-size: var(--text-base);
         }
 
-        .btn:hover {
-            background: #2563eb;
-            transform: translateY(-1px);
+        .login-btn:hover:not(:disabled) {
+            box-shadow: var(--shadow-lg), 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
-        .btn:active {
-            transform: translateY(0);
+        .login-btn:disabled {
+            background: var(--color-gray-600);
+            opacity: 0.7;
         }
 
-        .btn:disabled {
-            background: #475569;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .error-message {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+        /* Error message */
+        .login-error {
             display: none;
+            padding: var(--space-3) var(--space-4);
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-lg);
+            color: var(--color-danger-300);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-5);
+            animation: shake 0.5s ease;
         }
 
-        .error-message.show {
-            display: block;
+        .login-error.show {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
         }
 
-        .back-link {
-            display: block;
+        .login-error svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* reCAPTCHA notice */
+        .recaptcha-notice {
+            font-size: var(--text-xs);
+            color: var(--color-gray-500);
             text-align: center;
-            margin-top: 1.5rem;
-            color: #94a3b8;
+            margin-top: var(--space-6);
+            line-height: var(--leading-relaxed);
+        }
+
+        .recaptcha-notice a {
+            color: var(--color-gray-400);
+            text-decoration: underline;
+        }
+
+        .recaptcha-notice a:hover {
+            color: var(--color-gray-300);
+        }
+
+        /* Back link */
+        .back-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-top: var(--space-6);
+            color: var(--color-gray-400);
+            font-size: var(--text-sm);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            transition: color var(--duration-fast) var(--ease-in-out);
         }
 
         .back-link:hover {
-            color: #e2e8f0;
+            color: var(--color-gray-200);
         }
 
-        .loading-spinner {
-            display: inline-block;
+        .back-link svg {
             width: 16px;
             height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-right: 0.5rem;
-            vertical-align: middle;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* reCAPTCHA badge - positioned bottom right by default, hide and show notice instead */
+        /* Hide reCAPTCHA badge */
         .grecaptcha-badge {
             visibility: hidden;
         }
 
-        .recaptcha-notice {
-            font-size: 0.75rem;
-            color: #64748b;
-            text-align: center;
-            margin-top: 1.5rem;
-            line-height: 1.5;
+        /* Loading spinner */
+        .btn-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin var(--duration-700) linear infinite;
+            margin-right: var(--space-2);
         }
 
-        .recaptcha-notice a {
-            color: #94a3b8;
+        /* Theme toggle */
+        .login-theme-toggle {
+            position: fixed;
+            top: var(--space-6);
+            right: var(--space-6);
+            z-index: 10;
+            color: var(--color-gray-400);
+        }
+
+        .login-theme-toggle:hover {
+            color: var(--color-gray-200);
+            background: rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <div class="logo">&#9993;</div>
-            <h1>Yoot Email</h1>
-            <p class="subtitle">Sign in to continue</p>
+    <div class="login-page">
+        <!-- Theme Toggle -->
+        <button class="btn btn--ghost btn--icon login-theme-toggle" onclick="ThemeManager.toggle()" title="Toggle theme">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+        </button>
+
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">&#9993;</div>
+                <h1 class="login-title">Welcome back</h1>
+                <p class="login-subtitle">Sign in to your account</p>
+            </div>
+
+            <div id="login-error" class="login-error">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="15" y1="9" x2="9" y2="15"/>
+                    <line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+                <span id="error-text"></span>
+            </div>
+
+            <form id="login-form" class="login-form">
+                <div class="form-field">
+                    <label class="form-field__label" for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="input" placeholder="you@example.com" required autofocus>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="password">Password</label>
+                    <input type="password" id="password" name="password" class="input" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn btn--primary login-btn" id="login-btn">
+                    Sign In
+                </button>
+            </form>
+
+            <p class="recaptcha-notice">
+                This site is protected by reCAPTCHA and the Google
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.
+            </p>
+
+            <a href="index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to home
+            </a>
         </div>
-
-        <div id="error-message" class="error-message"></div>
-
-        <form id="login-form">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="you@example.com" required autofocus>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-
-            <button type="submit" class="btn" id="login-btn">Sign In</button>
-        </form>
-
-        <p class="recaptcha-notice">
-            This site is protected by reCAPTCHA and the Google
-            <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and
-            <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
-        </p>
-
-        <a href="index.html" class="back-link">&larr; Back to home</a>
     </div>
 
+    <script src="js/theme.js"></script>
     <script>
         // reCAPTCHA v3 configuration
         const RECAPTCHA_SITE_KEY = '6LcFoEYsAAAAAAoVFYqSC5ZGErwtAMQh-XqnCJzB';
@@ -228,7 +286,6 @@
                         return;
                     }
                     if (typeof grecaptcha === 'undefined') {
-                        // reCAPTCHA not loaded, skip verification
                         resolve(null);
                         return;
                     }
@@ -241,7 +298,6 @@
             },
 
             async login(email, password) {
-                // Get reCAPTCHA token
                 let recaptchaToken = null;
                 try {
                     recaptchaToken = await this.getRecaptchaToken();
@@ -249,7 +305,6 @@
                     console.warn('reCAPTCHA failed:', e);
                 }
 
-                // Validate credentials via API (with reCAPTCHA token)
                 const authResponse = await fetch(`${this.apiUrl}/auth/validate`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -303,21 +358,22 @@
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const btn = document.getElementById('login-btn');
-            const errorEl = document.getElementById('error-message');
+            const errorEl = document.getElementById('login-error');
+            const errorText = document.getElementById('error-text');
 
             // Clear previous errors
             errorEl.classList.remove('show');
 
             // Disable button and show loading
             btn.disabled = true;
-            btn.innerHTML = '<span class="loading-spinner"></span>Verifying...';
+            btn.innerHTML = '<span class="btn-spinner"></span>Signing in...';
 
             try {
                 const user = await Auth.login(email, password);
                 Auth.saveSession(user);
                 window.location.href = 'app.html';
             } catch (error) {
-                errorEl.textContent = error.message;
+                errorText.textContent = error.message;
                 errorEl.classList.add('show');
                 btn.disabled = false;
                 btn.textContent = 'Sign In';

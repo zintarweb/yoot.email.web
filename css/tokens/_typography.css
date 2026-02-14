@@ -1,0 +1,106 @@
+/**
+ * Typography Tokens
+ *
+ * Font families, sizes, weights, and line heights
+ */
+
+:root {
+  /* ==========================================================================
+     FONT FAMILIES
+     ========================================================================== */
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+               'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code',
+               'Roboto Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --font-display: var(--font-sans);
+
+  /* ==========================================================================
+     FONT SIZES
+     Fluid scale with clamp for responsive typography
+     ========================================================================== */
+
+  --text-2xs: 0.625rem;    /* 10px */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  --text-5xl: 3rem;        /* 48px */
+  --text-6xl: 3.75rem;     /* 60px */
+
+  /* ==========================================================================
+     FONT WEIGHTS
+     ========================================================================== */
+
+  --font-thin: 100;
+  --font-extralight: 200;
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  --font-black: 900;
+
+  /* ==========================================================================
+     LINE HEIGHTS
+     ========================================================================== */
+
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* ==========================================================================
+     LETTER SPACING
+     ========================================================================== */
+
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ==========================================================================
+     SEMANTIC TYPOGRAPHY
+     Pre-composed text styles for common use cases
+     ========================================================================== */
+
+  /* Display - Hero/Marketing */
+  --text-display-lg: var(--font-bold) var(--text-5xl)/var(--leading-tight) var(--font-display);
+  --text-display-md: var(--font-bold) var(--text-4xl)/var(--leading-tight) var(--font-display);
+  --text-display-sm: var(--font-bold) var(--text-3xl)/var(--leading-tight) var(--font-display);
+
+  /* Headings */
+  --text-heading-xl: var(--font-semibold) var(--text-2xl)/var(--leading-tight) var(--font-sans);
+  --text-heading-lg: var(--font-semibold) var(--text-xl)/var(--leading-tight) var(--font-sans);
+  --text-heading-md: var(--font-semibold) var(--text-lg)/var(--leading-snug) var(--font-sans);
+  --text-heading-sm: var(--font-semibold) var(--text-base)/var(--leading-snug) var(--font-sans);
+  --text-heading-xs: var(--font-semibold) var(--text-sm)/var(--leading-snug) var(--font-sans);
+
+  /* Body */
+  --text-body-lg: var(--font-normal) var(--text-lg)/var(--leading-relaxed) var(--font-sans);
+  --text-body-md: var(--font-normal) var(--text-base)/var(--leading-normal) var(--font-sans);
+  --text-body-sm: var(--font-normal) var(--text-sm)/var(--leading-normal) var(--font-sans);
+  --text-body-xs: var(--font-normal) var(--text-xs)/var(--leading-normal) var(--font-sans);
+
+  /* Labels */
+  --text-label-lg: var(--font-medium) var(--text-sm)/var(--leading-tight) var(--font-sans);
+  --text-label-md: var(--font-medium) var(--text-xs)/var(--leading-tight) var(--font-sans);
+  --text-label-sm: var(--font-medium) var(--text-2xs)/var(--leading-tight) var(--font-sans);
+
+  /* Code */
+  --text-code-lg: var(--font-normal) var(--text-base)/var(--leading-normal) var(--font-mono);
+  --text-code-md: var(--font-normal) var(--text-sm)/var(--leading-normal) var(--font-mono);
+  --text-code-sm: var(--font-normal) var(--text-xs)/var(--leading-normal) var(--font-mono);
+}

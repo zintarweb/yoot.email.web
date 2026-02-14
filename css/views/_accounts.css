@@ -1,0 +1,532 @@
+/**
+ * Accounts View Styles
+ *
+ * Email account management, connection status, and settings
+ */
+
+/* ==========================================================================
+   ACCOUNTS LAYOUT
+   ========================================================================== */
+
+.accounts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ==========================================================================
+   ACCOUNTS LIST
+   ========================================================================== */
+
+.accounts-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* ==========================================================================
+   ACCOUNT CARD
+   ========================================================================== */
+
+.account-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5);
+  background-color: var(--color-bg-secondary);
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.account-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Account Card States */
+.account-card.needs-reauth {
+  border-left: 4px solid var(--color-danger-500);
+  background-color: var(--color-danger-50);
+}
+
+.account-card.syncing {
+  border-left: 4px solid var(--color-warning-500);
+}
+
+.account-card.connected {
+  border-left: 4px solid var(--color-success-500);
+}
+
+/* Account Info */
+.account-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.account-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.account-icon svg,
+.account-icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.account-icon--gmail {
+  background-color: #fff;
+}
+
+.account-icon--outlook {
+  background-color: #0078d4;
+  color: white;
+}
+
+.account-icon--yahoo {
+  background-color: #6001d2;
+  color: white;
+}
+
+.account-icon--imap {
+  background-color: var(--color-gray-700);
+  color: white;
+}
+
+.account-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-email {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-provider {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.account-provider span {
+  margin-left: var(--space-2);
+  color: var(--color-text-tertiary);
+}
+
+/* Auth Error */
+.auth-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-danger-600);
+}
+
+.auth-error svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Account Status Badge */
+.account-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.account-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+}
+
+.account-status.synced {
+  background-color: var(--color-success-100);
+  color: var(--color-success-700);
+}
+
+.account-status.synced::before {
+  background-color: var(--color-success-500);
+}
+
+.account-status.syncing {
+  background-color: var(--color-warning-100);
+  color: var(--color-warning-700);
+}
+
+.account-status.syncing::before {
+  background-color: var(--color-warning-500);
+  animation: pulse 1.5s infinite;
+}
+
+.account-status.error {
+  background-color: var(--color-danger-100);
+  color: var(--color-danger-700);
+}
+
+.account-status.error::before {
+  background-color: var(--color-danger-500);
+}
+
+.account-status.pending {
+  background-color: var(--color-info-100);
+  color: var(--color-info-700);
+}
+
+.account-status.pending::before {
+  background-color: var(--color-info-500);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Account Actions */
+.account-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: var(--space-4);
+}
+
+.account-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: var(--transition-button);
+}
+
+.account-action-btn:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-primary);
+}
+
+.account-action-btn--danger:hover {
+  background-color: var(--color-danger-50);
+  color: var(--color-danger-600);
+  border-color: var(--color-danger-200);
+}
+
+.account-action-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   ADD ACCOUNT CARD
+   ========================================================================== */
+
+.add-account-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  background-color: var(--color-bg-secondary);
+  border: 2px dashed var(--color-border-primary);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: var(--transition-card);
+}
+
+.add-account-card:hover {
+  border-color: var(--color-brand-300);
+  background-color: var(--color-bg-brand-subtle);
+}
+
+.add-account-card__icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  transition: var(--transition-button);
+}
+
+.add-account-card:hover .add-account-card__icon {
+  background-color: var(--color-brand-100);
+  color: var(--color-brand-600);
+}
+
+.add-account-card__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.add-account-card__text {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+}
+
+.add-account-card:hover .add-account-card__text {
+  color: var(--color-brand-600);
+}
+
+/* ==========================================================================
+   ACCOUNT PROVIDERS GRID
+   ========================================================================== */
+
+.account-providers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.provider-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background-color: var(--color-bg-secondary);
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: var(--transition-card);
+}
+
+.provider-option:hover {
+  border-color: var(--color-brand-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.provider-option__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.provider-option__icon svg,
+.provider-option__icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.provider-option__name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   ACCOUNT STATS
+   ========================================================================== */
+
+.account-stats {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: var(--border-1) solid var(--color-border-secondary);
+}
+
+.account-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.account-stat__value {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+}
+
+.account-stat__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .account-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .account-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .account-actions {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+
+  .account-providers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .account-providers {
+    grid-template-columns: 1fr;
+  }
+
+  .account-stats {
+    flex-wrap: wrap;
+  }
+
+  .account-stat {
+    flex: 1 1 calc(50% - var(--space-2));
+  }
+}
+
+/* ==========================================================================
+   DARK MODE OVERRIDES
+   ========================================================================== */
+
+[data-theme="dark"] .account-card.needs-reauth {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme="dark"] .account-icon--gmail {
+  background-color: var(--color-gray-700);
+}
+
+[data-theme="dark"] .account-status.synced {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: var(--color-success-300);
+}
+
+[data-theme="dark"] .account-status.syncing {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: var(--color-warning-300);
+}
+
+[data-theme="dark"] .account-status.error {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: var(--color-danger-300);
+}
+
+[data-theme="dark"] .account-status.pending {
+  background-color: rgba(6, 182, 212, 0.2);
+  color: var(--color-info-300);
+}
+
+[data-theme="dark"] .auth-error {
+  color: var(--color-danger-400);
+}
+
+[data-theme="dark"] .account-action-btn--danger:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--color-danger-400);
+  border-color: var(--color-danger-500);
+}
+
+[data-theme="dark"] .add-account-card:hover .add-account-card__icon {
+  background-color: rgba(37, 99, 235, 0.2);
+  color: var(--color-brand-400);
+}
+
+[data-theme="dark"] .add-account-card:hover .add-account-card__text {
+  color: var(--color-brand-400);
+}
+
+[data-theme="dark"] .provider-option:hover {
+  border-color: var(--color-brand-500);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .account-card.needs-reauth {
+    background-color: rgba(239, 68, 68, 0.15);
+  }
+
+  :root:not([data-theme="light"]) .account-icon--gmail {
+    background-color: var(--color-gray-700);
+  }
+
+  :root:not([data-theme="light"]) .account-status.synced {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: var(--color-success-300);
+  }
+
+  :root:not([data-theme="light"]) .account-status.syncing {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: var(--color-warning-300);
+  }
+
+  :root:not([data-theme="light"]) .account-status.error {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--color-danger-300);
+  }
+
+  :root:not([data-theme="light"]) .account-status.pending {
+    background-color: rgba(6, 182, 212, 0.2);
+    color: var(--color-info-300);
+  }
+
+  :root:not([data-theme="light"]) .auth-error {
+    color: var(--color-danger-400);
+  }
+
+  :root:not([data-theme="light"]) .account-action-btn--danger:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--color-danger-400);
+    border-color: var(--color-danger-500);
+  }
+
+  :root:not([data-theme="light"]) .add-account-card:hover .add-account-card__icon {
+    background-color: rgba(37, 99, 235, 0.2);
+    color: var(--color-brand-400);
+  }
+
+  :root:not([data-theme="light"]) .add-account-card:hover .add-account-card__text {
+    color: var(--color-brand-400);
+  }
+
+  :root:not([data-theme="light"]) .provider-option:hover {
+    border-color: var(--color-brand-500);
+  }
+}

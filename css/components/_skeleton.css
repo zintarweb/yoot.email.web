@@ -1,0 +1,471 @@
+/**
+ * Skeleton Component
+ *
+ * Loading placeholders for content
+ */
+
+/* ==========================================================================
+   BASE SKELETON
+   ========================================================================== */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-gray-200);
+  border-radius: var(--radius-md);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gray-100) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   SKELETON VARIANTS
+   ========================================================================== */
+
+/* Text */
+.skeleton--text {
+  height: 1em;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton--text-sm {
+  height: 0.875em;
+}
+
+.skeleton--text-lg {
+  height: 1.25em;
+}
+
+/* Title/Heading */
+.skeleton--title {
+  height: 1.5em;
+  width: 60%;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton--title-lg {
+  height: 2em;
+  width: 50%;
+}
+
+/* Paragraph */
+.skeleton--paragraph {
+  height: 1em;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton--paragraph:nth-child(odd) {
+  width: 90%;
+}
+
+.skeleton--paragraph:last-child {
+  width: 70%;
+}
+
+/* Avatar */
+.skeleton--avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.skeleton--avatar-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.skeleton--avatar-lg {
+  width: 56px;
+  height: 56px;
+}
+
+.skeleton--avatar-xl {
+  width: 80px;
+  height: 80px;
+}
+
+/* Image/Thumbnail */
+.skeleton--image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+}
+
+.skeleton--image-square {
+  aspect-ratio: 1;
+}
+
+/* Button */
+.skeleton--button {
+  height: 36px;
+  width: 100px;
+  border-radius: var(--radius-button);
+}
+
+.skeleton--button-sm {
+  height: 28px;
+  width: 80px;
+}
+
+.skeleton--button-lg {
+  height: 44px;
+  width: 120px;
+}
+
+/* Badge */
+.skeleton--badge {
+  height: 22px;
+  width: 60px;
+  border-radius: var(--radius-badge);
+}
+
+/* ==========================================================================
+   SKELETON CARD
+   ========================================================================== */
+
+.skeleton-card {
+  padding: var(--space-5);
+  background-color: var(--color-bg-secondary);
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-card);
+}
+
+.skeleton-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.skeleton-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ==========================================================================
+   SKELETON TABLE
+   ========================================================================== */
+
+.skeleton-table {
+  width: 100%;
+}
+
+.skeleton-table__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-1) solid var(--color-border-secondary);
+}
+
+.skeleton-table__cell {
+  flex: 1;
+}
+
+.skeleton-table__cell--checkbox {
+  flex: 0 0 40px;
+}
+
+.skeleton-table__cell--actions {
+  flex: 0 0 80px;
+}
+
+/* ==========================================================================
+   SKELETON LIST
+   ========================================================================== */
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.skeleton-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.skeleton-list-item__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ==========================================================================
+   SKELETON STAT CARD
+   ========================================================================== */
+
+.skeleton-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background-color: var(--color-bg-secondary);
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-card);
+}
+
+.skeleton-stat__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+}
+
+.skeleton-stat__value {
+  height: 2.5em;
+  width: 60%;
+}
+
+.skeleton-stat__label {
+  height: 1em;
+  width: 40%;
+}
+
+/* ==========================================================================
+   SKELETON PROFILE
+   ========================================================================== */
+
+.skeleton-profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.skeleton-profile__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+/* Width variants */
+.skeleton--w-25 { width: 25%; }
+.skeleton--w-50 { width: 50%; }
+.skeleton--w-75 { width: 75%; }
+.skeleton--w-full { width: 100%; }
+
+/* Animation pause (for reduced motion) */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+    background: var(--color-gray-100);
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .skeleton {
+  background-color: var(--color-gray-700);
+}
+
+[data-theme="dark"] .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gray-600) 50%,
+    transparent 100%
+  );
+}
+
+/* ==========================================================================
+   SKELETON LOADING LAYOUTS
+   ========================================================================== */
+
+/* Stats Grid Skeleton */
+.skeleton-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-5);
+}
+
+.skeleton-stat-card {
+  padding: var(--space-5);
+  background-color: var(--color-bg-secondary);
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-xl);
+}
+
+/* Grid Skeleton */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-5);
+}
+
+.skeleton-card-full {
+  background-color: var(--color-bg-secondary);
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.skeleton--card {
+  width: 100%;
+  height: 120px;
+}
+
+/* List Skeleton */
+.skeleton-list-item {
+  padding: var(--space-3) 0;
+  border-bottom: var(--border-1) solid var(--color-border-secondary);
+}
+
+.skeleton-list-item:last-child {
+  border-bottom: none;
+}
+
+.skeleton-list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Table Skeleton */
+.skeleton-table-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-1) solid var(--color-border-secondary);
+}
+
+.skeleton-table-header {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Generic Skeleton */
+.skeleton-generic {
+  padding: var(--space-4);
+}
+
+/* ==========================================================================
+   LOADING STATE CONTAINER
+   ========================================================================== */
+
+.is-loading {
+  pointer-events: none;
+  min-height: 100px;
+}
+
+.is-loaded > * {
+  animation: fadeSlideIn var(--duration-normal) var(--ease-out);
+}
+
+/* ==========================================================================
+   STAGGERED ANIMATIONS
+   ========================================================================== */
+
+.stagger-item {
+  animation: staggerFadeIn var(--duration-normal) var(--ease-out) backwards;
+  animation-delay: calc(var(--stagger-index, 0) * 50ms);
+}
+
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   BUTTON LOADING STATE
+   ========================================================================== */
+
+.btn--loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn--loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin var(--duration-700) linear infinite;
+}
+
+.btn-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin var(--duration-700) linear infinite;
+  margin-right: var(--space-2);
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   PULSE ANIMATION FOR UPDATES
+   ========================================================================== */
+
+.pulse-update {
+  animation: pulseHighlight 0.6s ease-out;
+}
+
+@keyframes pulseHighlight {
+  0% {
+    background-color: var(--color-brand-100);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+[data-theme="dark"] .pulse-update {
+  animation-name: pulseHighlightDark;
+}
+
+@keyframes pulseHighlightDark {
+  0% {
+    background-color: rgba(59, 130, 246, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}

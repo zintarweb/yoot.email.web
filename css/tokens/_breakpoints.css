@@ -1,0 +1,80 @@
+/**
+ * Breakpoint Tokens
+ *
+ * Responsive design breakpoints and container queries
+ * Note: CSS custom properties can't be used directly in media queries,
+ * but we document them here for reference and use in JavaScript
+ */
+
+:root {
+  /* ==========================================================================
+     BREAKPOINT VALUES (for reference/JS)
+     ========================================================================== */
+
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ==========================================================================
+     CONTAINER WIDTHS
+     Max widths for content containers at each breakpoint
+     ========================================================================== */
+
+  --container-xs: 100%;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+}
+
+/* ==========================================================================
+   BREAKPOINT MIXINS (via media queries)
+
+   Usage in other CSS files:
+   @media (min-width: 640px) { } - sm and up
+   @media (min-width: 768px) { } - md and up
+   @media (min-width: 1024px) { } - lg and up
+   @media (min-width: 1280px) { } - xl and up
+   @media (min-width: 1536px) { } - 2xl and up
+
+   Mobile-first approach: base styles are mobile, then override for larger
+   ========================================================================== */
+
+/*
+ * Breakpoint Reference:
+ *
+ * xs: 0 - 474px      (extra small phones)
+ * sm: 475px - 639px  (small phones)
+ * md: 640px - 767px  (large phones, small tablets)
+ * lg: 768px - 1023px (tablets)
+ * xl: 1024px - 1279px (small laptops, large tablets)
+ * 2xl: 1280px+       (desktops)
+ *
+ * Common patterns:
+ * - Hide on mobile: display: none; @media (min-width: 768px) { display: block; }
+ * - Mobile menu: Show hamburger < 768px, full nav >= 768px
+ * - Sidebar: Collapsed < 1024px, expanded >= 1024px
+ * - Grid columns: 1 col mobile, 2 col tablet, 3-4 col desktop
+ */
+
+/* ==========================================================================
+   CONTAINER QUERY SETUP
+   For component-level responsive design
+   ========================================================================== */
+
+/*
+ * Container query usage:
+ *
+ * .card-container {
+ *   container-type: inline-size;
+ *   container-name: card;
+ * }
+ *
+ * @container card (min-width: 400px) {
+ *   .card { flex-direction: row; }
+ * }
+ */

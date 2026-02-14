@@ -1,0 +1,59 @@
+/**
+ * Emerald Green Theme
+ *
+ * A fresh, natural green theme perfect for health, wellness,
+ * or environmental-focused applications.
+ *
+ * Usage:
+ * <link rel="stylesheet" href="css/themes/emerald-green.css">
+ */
+
+:root {
+  /* Brand Colors - Emerald */
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+
+  /* Accent - Teal */
+  --color-accent-500: #14b8a6;
+  --color-accent-600: #0d9488;
+
+  /* Semantic Brand Mappings */
+  --color-interactive-primary: var(--color-brand-600);
+  --color-interactive-hover: var(--color-brand-700);
+  --color-interactive-active: var(--color-brand-800);
+
+  --color-bg-brand-subtle: var(--color-brand-50);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-400) 0%, var(--color-brand-600) 100%);
+  --gradient-dark: linear-gradient(180deg, #064e3b 0%, #022c22 100%);
+
+  /* Component Adjustments - Softer/Rounder */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  --color-brand-50: #022c22;
+  --color-brand-100: #064e3b;
+  --color-brand-200: #065f46;
+  --color-brand-300: #047857;
+  --color-brand-400: #059669;
+  --color-brand-500: #10b981;
+  --color-brand-600: #34d399;
+  --color-brand-700: #6ee7b7;
+
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-400) 100%);
+}

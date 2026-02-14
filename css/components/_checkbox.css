@@ -1,0 +1,346 @@
+/**
+ * Checkbox & Radio Component
+ *
+ * Custom styled checkboxes and radio buttons
+ */
+
+/* ==========================================================================
+   BASE CHECKBOX
+   ========================================================================== */
+
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox__input {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--color-bg-secondary);
+  border: var(--border-2) solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-input);
+}
+
+/* Hover state */
+.checkbox__input:hover:not(:disabled) {
+  border-color: var(--color-border-tertiary);
+}
+
+/* Focus state */
+.checkbox__input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Checked state */
+.checkbox__input:checked {
+  background-color: var(--color-brand-600);
+  border-color: var(--color-brand-600);
+}
+
+.checkbox__input:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--color-text-inverse);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Indeterminate state */
+.checkbox__input:indeterminate {
+  background-color: var(--color-brand-600);
+  border-color: var(--color-brand-600);
+}
+
+.checkbox__input:indeterminate::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 7px;
+  width: 10px;
+  height: 2px;
+  background-color: var(--color-text-inverse);
+  border-radius: 1px;
+}
+
+/* Disabled state */
+.checkbox__input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkbox__input:disabled + .checkbox__label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Label */
+.checkbox__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  line-height: var(--leading-normal);
+}
+
+.checkbox__description {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-0-5);
+}
+
+/* ==========================================================================
+   CHECKBOX SIZES
+   ========================================================================== */
+
+.checkbox--sm .checkbox__input {
+  width: 14px;
+  height: 14px;
+}
+
+.checkbox--sm .checkbox__input:checked::after {
+  left: 3px;
+  top: 1px;
+  width: 4px;
+  height: 7px;
+}
+
+.checkbox--sm .checkbox__label {
+  font-size: var(--text-xs);
+}
+
+.checkbox--lg .checkbox__input {
+  width: 22px;
+  height: 22px;
+}
+
+.checkbox--lg .checkbox__input:checked::after {
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+}
+
+.checkbox--lg .checkbox__label {
+  font-size: var(--text-base);
+}
+
+/* ==========================================================================
+   RADIO BUTTON
+   ========================================================================== */
+
+.radio {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio__input {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--color-bg-secondary);
+  border: var(--border-2) solid var(--color-border-primary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-input);
+}
+
+/* Hover state */
+.radio__input:hover:not(:disabled) {
+  border-color: var(--color-border-tertiary);
+}
+
+/* Focus state */
+.radio__input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Checked state */
+.radio__input:checked {
+  border-color: var(--color-brand-600);
+}
+
+.radio__input:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-brand-600);
+  border-radius: var(--radius-full);
+}
+
+/* Disabled state */
+.radio__input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.radio__input:disabled + .radio__label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Label */
+.radio__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  line-height: var(--leading-normal);
+}
+
+.radio__description {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-0-5);
+}
+
+/* ==========================================================================
+   CHECKBOX/RADIO GROUP
+   ========================================================================== */
+
+.checkbox-group,
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.checkbox-group--horizontal,
+.radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* ==========================================================================
+   SWITCH (Checkbox variant)
+   ========================================================================== */
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch__slider {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background-color: var(--color-gray-300);
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-normal) var(--ease-in-out);
+}
+
+.switch__slider::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+/* Hover */
+.switch:hover .switch__slider {
+  background-color: var(--color-gray-400);
+}
+
+/* Focus */
+.switch__input:focus + .switch__slider {
+  box-shadow: var(--shadow-focus);
+}
+
+/* Checked */
+.switch__input:checked + .switch__slider {
+  background-color: var(--color-brand-600);
+}
+
+.switch__input:checked + .switch__slider::after {
+  transform: translateX(20px);
+}
+
+/* Disabled */
+.switch__input:disabled + .switch__slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.switch__input:disabled ~ .switch__label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Label */
+.switch__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   SWITCH SIZES
+   ========================================================================== */
+
+.switch--sm .switch__slider {
+  width: 36px;
+  height: 20px;
+}
+
+.switch--sm .switch__slider::after {
+  width: 16px;
+  height: 16px;
+}
+
+.switch--sm .switch__input:checked + .switch__slider::after {
+  transform: translateX(16px);
+}
+
+.switch--lg .switch__slider {
+  width: 52px;
+  height: 28px;
+}
+
+.switch--lg .switch__slider::after {
+  width: 24px;
+  height: 24px;
+}
+
+.switch--lg .switch__input:checked + .switch__slider::after {
+  transform: translateX(24px);
+}

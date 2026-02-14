@@ -1,0 +1,125 @@
+/**
+ * White-Label Theme Template
+ *
+ * Copy this file and customize for each white-label client.
+ * Only override the brand colors - all other semantic colors derive from these.
+ *
+ * Usage:
+ * 1. Copy this file to: themes/client-name.css
+ * 2. Update the brand color palette below
+ * 3. Optionally override fonts and other brand-specific styles
+ * 4. Import the theme file after main.css
+ */
+
+/* ==========================================================================
+   CLIENT BRAND CONFIGURATION
+   ========================================================================== */
+
+:root {
+  /* ==========================================================================
+     BRAND COLORS
+     Generate a full palette from your brand's primary color
+     Tool: https://uicolors.app/create
+     ========================================================================== */
+
+  /* Example: Purple brand
+  --color-brand-50: #faf5ff;
+  --color-brand-100: #f3e8ff;
+  --color-brand-200: #e9d5ff;
+  --color-brand-300: #d8b4fe;
+  --color-brand-400: #c084fc;
+  --color-brand-500: #a855f7;
+  --color-brand-600: #9333ea;
+  --color-brand-700: #7e22ce;
+  --color-brand-800: #6b21a8;
+  --color-brand-900: #581c87;
+  --color-brand-950: #3b0764;
+  */
+
+  /* Example: Teal brand
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-200: #99f6e4;
+  --color-brand-300: #5eead4;
+  --color-brand-400: #2dd4bf;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+  --color-brand-950: #042f2e;
+  */
+
+  /* Example: Orange brand
+  --color-brand-50: #fff7ed;
+  --color-brand-100: #ffedd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fdba74;
+  --color-brand-400: #fb923c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+  --color-brand-800: #9a3412;
+  --color-brand-900: #7c2d12;
+  --color-brand-950: #431407;
+  */
+
+  /* ==========================================================================
+     CUSTOM FONTS (Optional)
+     ========================================================================== */
+
+  /* Example: Custom brand font
+  --font-sans: 'Your Brand Font', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Your Display Font', var(--font-sans);
+  */
+
+  /* ==========================================================================
+     CUSTOM BORDER RADIUS (Optional)
+     Adjust the overall "roundness" of the UI
+     ========================================================================== */
+
+  /* Example: More rounded
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  */
+
+  /* Example: More squared
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+  */
+}
+
+/* ==========================================================================
+   CUSTOM COMPONENT OVERRIDES (Optional)
+   Add brand-specific component style overrides below
+   ========================================================================== */
+
+/*
+.btn--primary {
+  // Custom button styling
+}
+
+.sidebar {
+  // Custom sidebar styling
+}
+
+.card {
+  // Custom card styling
+}
+*/
+
+/* ==========================================================================
+   CUSTOM LOGO / BRANDING (Optional)
+   ========================================================================== */
+
+/*
+.brand-logo {
+  background-image: url('/path/to/client-logo.svg');
+}
+*/

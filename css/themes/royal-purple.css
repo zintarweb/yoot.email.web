@@ -1,0 +1,55 @@
+/**
+ * Royal Purple Theme
+ *
+ * An elegant purple theme suitable for luxury brands,
+ * creative agencies, or premium services.
+ *
+ * Usage:
+ * <link rel="stylesheet" href="css/themes/royal-purple.css">
+ */
+
+:root {
+  /* Brand Colors - Royal Purple */
+  --color-brand-50: #faf5ff;
+  --color-brand-100: #f3e8ff;
+  --color-brand-200: #e9d5ff;
+  --color-brand-300: #d8b4fe;
+  --color-brand-400: #c084fc;
+  --color-brand-500: #a855f7;
+  --color-brand-600: #9333ea;
+  --color-brand-700: #7e22ce;
+  --color-brand-800: #6b21a8;
+  --color-brand-900: #581c87;
+
+  /* Accent - Fuchsia */
+  --color-accent-500: #d946ef;
+  --color-accent-600: #c026d3;
+
+  /* Semantic Brand Mappings */
+  --color-interactive-primary: var(--color-brand-600);
+  --color-interactive-hover: var(--color-brand-700);
+  --color-interactive-active: var(--color-brand-800);
+
+  --color-bg-brand-subtle: var(--color-brand-50);
+
+  /* Gradients - Luxurious */
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-accent-500) 100%);
+  --gradient-dark: linear-gradient(180deg, #581c87 0%, #2e1065 100%);
+
+  /* Focus ring in brand color */
+  --shadow-focus: 0 0 0 3px rgba(168, 85, 247, 0.4);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  --color-brand-50: #2e1065;
+  --color-brand-100: #3b0764;
+  --color-brand-200: #581c87;
+  --color-brand-300: #6b21a8;
+  --color-brand-400: #7e22ce;
+  --color-brand-500: #9333ea;
+  --color-brand-600: #a855f7;
+  --color-brand-700: #c084fc;
+
+  --shadow-focus: 0 0 0 3px rgba(192, 132, 252, 0.4);
+}

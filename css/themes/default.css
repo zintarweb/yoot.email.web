@@ -1,0 +1,80 @@
+/**
+ * Default Theme - yoot.email
+ *
+ * This is the default light theme configuration.
+ * All semantic color mappings are defined in _colors.css :root
+ * This file can be used for theme-specific overrides.
+ */
+
+/* ==========================================================================
+   LIGHT MODE (Default)
+   No overrides needed - values are set in :root in _colors.css
+   ========================================================================== */
+
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+  color-scheme: light;
+
+  /* Dimmed light mode - less harsh on the eyes */
+  --color-bg-primary: #f1f5f9;      /* Slightly darker than default #f9fafb */
+  --color-bg-secondary: #f8fafc;    /* Slightly off-white instead of pure white */
+  --color-bg-tertiary: #e2e8f0;     /* Darker tertiary */
+  --color-border-secondary: #e2e8f0;
+}
+
+/* ==========================================================================
+   BRAND CUSTOMIZATION LAYER
+   Override these for quick brand color changes
+   ========================================================================== */
+
+/*
+ * To customize the brand for white-labeling, override these variables:
+ *
+ * :root {
+ *   --color-brand-500: #your-brand-color;
+ *   --color-brand-600: #your-brand-darker;
+ *   --color-brand-700: #your-brand-darkest;
+ *   // ... other brand shades
+ * }
+ */
+
+/* ==========================================================================
+   THEME-SPECIFIC COMPONENT STYLES
+   ========================================================================== */
+
+/* Scrollbar styling for light mode */
+[data-theme="light"] *,
+:root:not([data-theme="dark"]) * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-300) var(--color-gray-100);
+}
+
+[data-theme="light"] *::-webkit-scrollbar,
+:root:not([data-theme="dark"]) *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="light"] *::-webkit-scrollbar-track,
+:root:not([data-theme="dark"]) *::-webkit-scrollbar-track {
+  background: var(--color-gray-100);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="light"] *::-webkit-scrollbar-thumb,
+:root:not([data-theme="dark"]) *::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: var(--radius-full);
+}
+
+[data-theme="light"] *::-webkit-scrollbar-thumb:hover,
+:root:not([data-theme="dark"]) *::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-400);
+}
+
+/* Selection color */
+[data-theme="light"] ::selection,
+:root:not([data-theme="dark"]) ::selection {
+  background-color: var(--color-brand-100);
+  color: var(--color-brand-900);
+}

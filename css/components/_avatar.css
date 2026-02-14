@@ -1,0 +1,295 @@
+/**
+ * Avatar Component
+ *
+ * User profile images and initials
+ */
+
+/* ==========================================================================
+   BASE AVATAR
+   ========================================================================== */
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-brand-subtle);
+  color: var(--color-brand-700);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar__initials {
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.avatar__icon {
+  width: 50%;
+  height: 50%;
+}
+
+/* ==========================================================================
+   AVATAR SIZES
+   ========================================================================== */
+
+.avatar--xs {
+  width: 24px;
+  height: 24px;
+  font-size: var(--text-2xs);
+}
+
+.avatar--sm {
+  width: 32px;
+  height: 32px;
+  font-size: var(--text-xs);
+}
+
+.avatar--lg {
+  width: 56px;
+  height: 56px;
+  font-size: var(--text-lg);
+}
+
+.avatar--xl {
+  width: 80px;
+  height: 80px;
+  font-size: var(--text-2xl);
+}
+
+.avatar--2xl {
+  width: 120px;
+  height: 120px;
+  font-size: var(--text-4xl);
+}
+
+/* ==========================================================================
+   AVATAR SHAPES
+   ========================================================================== */
+
+.avatar--square {
+  border-radius: var(--radius-lg);
+}
+
+.avatar--rounded {
+  border-radius: var(--radius-xl);
+}
+
+/* ==========================================================================
+   AVATAR COLORS
+   ========================================================================== */
+
+.avatar--gray {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-600);
+}
+
+.avatar--success {
+  background-color: var(--color-bg-success);
+  color: var(--color-success-700);
+}
+
+.avatar--warning {
+  background-color: var(--color-bg-warning);
+  color: var(--color-warning-700);
+}
+
+.avatar--danger {
+  background-color: var(--color-bg-danger);
+  color: var(--color-danger-700);
+}
+
+.avatar--info {
+  background-color: var(--color-bg-info);
+  color: var(--color-info-700);
+}
+
+/* Generate color from name (via data attribute + nth-child) */
+.avatar[data-color="0"] { background-color: #fee2e2; color: #991b1b; }
+.avatar[data-color="1"] { background-color: #fef3c7; color: #92400e; }
+.avatar[data-color="2"] { background-color: #d1fae5; color: #065f46; }
+.avatar[data-color="3"] { background-color: #dbeafe; color: #1e40af; }
+.avatar[data-color="4"] { background-color: #e0e7ff; color: #3730a3; }
+.avatar[data-color="5"] { background-color: #fce7f3; color: #9d174d; }
+.avatar[data-color="6"] { background-color: #ccfbf1; color: #0f766e; }
+.avatar[data-color="7"] { background-color: #f3e8ff; color: #6b21a8; }
+
+/* ==========================================================================
+   AVATAR WITH STATUS
+   ========================================================================== */
+
+.avatar__status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+.avatar--xs .avatar__status,
+.avatar--sm .avatar__status {
+  width: 8px;
+  height: 8px;
+  border-width: 1.5px;
+}
+
+.avatar--lg .avatar__status {
+  width: 14px;
+  height: 14px;
+}
+
+.avatar--xl .avatar__status {
+  width: 18px;
+  height: 18px;
+  border-width: 3px;
+}
+
+.avatar__status--online {
+  background-color: var(--color-success-500);
+}
+
+.avatar__status--offline {
+  background-color: var(--color-gray-400);
+}
+
+.avatar__status--busy {
+  background-color: var(--color-danger-500);
+}
+
+.avatar__status--away {
+  background-color: var(--color-warning-500);
+}
+
+/* ==========================================================================
+   AVATAR WITH BADGE
+   ========================================================================== */
+
+.avatar__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 var(--space-1);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-bold);
+  background-color: var(--color-danger-500);
+  color: var(--color-text-inverse);
+  border: 2px solid var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   AVATAR GROUP
+   ========================================================================== */
+
+.avatar-group {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.avatar-group .avatar {
+  margin-left: calc(var(--space-2) * -1);
+  border: 2px solid var(--color-bg-secondary);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.avatar-group .avatar:last-child {
+  margin-left: 0;
+}
+
+.avatar-group .avatar:hover {
+  transform: translateY(-2px);
+  z-index: 1;
+}
+
+/* Group sizes */
+.avatar-group--sm .avatar {
+  width: 28px;
+  height: 28px;
+  font-size: var(--text-xs);
+  margin-left: calc(var(--space-1-5) * -1);
+}
+
+.avatar-group--lg .avatar {
+  width: 48px;
+  height: 48px;
+  font-size: var(--text-base);
+  margin-left: calc(var(--space-3) * -1);
+}
+
+/* More indicator */
+.avatar-group__more {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   AVATAR PLACEHOLDER
+   ========================================================================== */
+
+.avatar--placeholder {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-quaternary);
+}
+
+.avatar--placeholder svg {
+  width: 60%;
+  height: 60%;
+}
+
+/* ==========================================================================
+   AVATAR UPLOAD
+   ========================================================================== */
+
+.avatar-upload {
+  position: relative;
+  cursor: pointer;
+}
+
+.avatar-upload__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-in-out);
+}
+
+.avatar-upload:hover .avatar-upload__overlay {
+  opacity: 1;
+}
+
+.avatar-upload__icon {
+  color: white;
+  width: 24px;
+  height: 24px;
+}
+
+.avatar-upload input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}

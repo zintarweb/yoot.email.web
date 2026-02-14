@@ -1,0 +1,260 @@
+/**
+ * Pagination Component
+ *
+ * Navigation for paginated content
+ */
+
+/* ==========================================================================
+   BASE PAGINATION
+   ========================================================================== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* ==========================================================================
+   PAGINATION ITEM
+   ========================================================================== */
+
+.pagination__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border: var(--border-1) solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: var(--transition-button);
+  user-select: none;
+}
+
+.pagination__item:hover:not(:disabled):not(.is-active) {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.pagination__item:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Active item */
+.pagination__item.is-active {
+  background-color: var(--color-brand-600);
+  color: var(--color-text-inverse);
+  border-color: var(--color-brand-600);
+}
+
+/* Disabled item */
+.pagination__item:disabled,
+.pagination__item.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   PAGINATION NAVIGATION
+   ========================================================================== */
+
+.pagination__prev,
+.pagination__next,
+.pagination__first,
+.pagination__last {
+  color: var(--color-text-secondary);
+}
+
+.pagination__prev svg,
+.pagination__next svg,
+.pagination__first svg,
+.pagination__last svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   PAGINATION ELLIPSIS
+   ========================================================================== */
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  color: var(--color-text-tertiary);
+  cursor: default;
+}
+
+/* ==========================================================================
+   PAGINATION INFO
+   ========================================================================== */
+
+.pagination__info {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-left: var(--space-2);
+}
+
+.pagination__info strong {
+  color: var(--color-text-primary);
+  font-weight: var(--font-semibold);
+}
+
+/* ==========================================================================
+   PAGINATION VARIANTS
+   ========================================================================== */
+
+/* Outlined */
+.pagination--outlined .pagination__item {
+  border-color: var(--color-border-primary);
+}
+
+.pagination--outlined .pagination__item:hover:not(:disabled):not(.is-active) {
+  border-color: var(--color-border-tertiary);
+}
+
+/* Minimal */
+.pagination--minimal .pagination__item {
+  min-width: auto;
+  padding: var(--space-1) var(--space-2);
+  background: none;
+  border: none;
+}
+
+.pagination--minimal .pagination__item.is-active {
+  background: none;
+  color: var(--color-brand-600);
+  font-weight: var(--font-bold);
+}
+
+/* Simple (prev/next only) */
+.pagination--simple {
+  justify-content: space-between;
+}
+
+.pagination--simple .pagination__prev,
+.pagination--simple .pagination__next {
+  padding: var(--space-2) var(--space-4);
+  gap: var(--space-2);
+}
+
+/* ==========================================================================
+   PAGINATION SIZES
+   ========================================================================== */
+
+.pagination--sm .pagination__item {
+  min-width: 28px;
+  height: 28px;
+  font-size: var(--text-xs);
+}
+
+.pagination--sm .pagination__prev svg,
+.pagination--sm .pagination__next svg {
+  width: 14px;
+  height: 14px;
+}
+
+.pagination--lg .pagination__item {
+  min-width: 44px;
+  height: 44px;
+  font-size: var(--text-base);
+}
+
+.pagination--lg .pagination__prev svg,
+.pagination--lg .pagination__next svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================================================
+   PAGINATION WITH PAGE SIZE
+   ========================================================================== */
+
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.pagination-wrapper__size {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.pagination-wrapper__size .select {
+  width: auto;
+  min-width: 70px;
+}
+
+/* ==========================================================================
+   RESPONSIVE PAGINATION
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .pagination--responsive .pagination__item:not(.pagination__prev):not(.pagination__next):not(.is-active) {
+    display: none;
+  }
+
+  .pagination--responsive .pagination__ellipsis {
+    display: none;
+  }
+
+  .pagination-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination-wrapper .pagination {
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   LOAD MORE BUTTON
+   ========================================================================== */
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.load-more__button {
+  min-width: 200px;
+}
+
+/* ==========================================================================
+   INFINITE SCROLL INDICATOR
+   ========================================================================== */
+
+.scroll-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  color: var(--color-text-tertiary);
+}
+
+.scroll-indicator__spinner {
+  width: 24px;
+  height: 24px;
+  animation: spin var(--duration-700) linear infinite;
+}
+
+.scroll-indicator__text {
+  font-size: var(--text-sm);
+}

@@ -1,0 +1,364 @@
+/**
+ * Table Component
+ *
+ * Data tables with sorting, selection, and responsive behavior
+ */
+
+/* ==========================================================================
+   TABLE CONTAINER
+   ========================================================================== */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: var(--border-1) solid var(--color-border-secondary);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-secondary);
+}
+
+/* ==========================================================================
+   BASE TABLE
+   ========================================================================== */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+/* ==========================================================================
+   TABLE HEADER
+   ========================================================================== */
+
+.table thead {
+  background-color: var(--color-bg-tertiary);
+}
+
+.table th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-weight: var(--font-semibold);
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  border-bottom: var(--border-1) solid var(--color-border-secondary);
+  white-space: nowrap;
+}
+
+.table th:first-child {
+  padding-left: var(--space-5);
+}
+
+.table th:last-child {
+  padding-right: var(--space-5);
+}
+
+/* Sortable header */
+.table th.is-sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--duration-fast) var(--ease-in-out);
+}
+
+.table th.is-sortable:hover {
+  background-color: var(--color-bg-quaternary);
+}
+
+.table__sort-icon {
+  display: inline-flex;
+  margin-left: var(--space-1);
+  color: var(--color-text-quaternary);
+}
+
+.table th.is-sorted .table__sort-icon {
+  color: var(--color-text-primary);
+}
+
+/* Resizable column */
+.table th.is-resizable {
+  position: relative;
+}
+
+.table__resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: col-resize;
+  background-color: transparent;
+  transition: background-color var(--duration-fast) var(--ease-in-out);
+}
+
+.table__resize-handle:hover,
+.table__resize-handle.is-dragging {
+  background-color: var(--color-brand-500);
+}
+
+/* ==========================================================================
+   TABLE BODY
+   ========================================================================== */
+
+.table td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-primary);
+  border-bottom: var(--border-1) solid var(--color-border-secondary);
+  vertical-align: middle;
+}
+
+.table td:first-child {
+  padding-left: var(--space-5);
+}
+
+.table td:last-child {
+  padding-right: var(--space-5);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Row hover */
+.table tbody tr:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Row selection */
+.table tbody tr.is-selected {
+  background-color: var(--color-bg-brand-subtle);
+}
+
+.table tbody tr.is-selected:hover {
+  background-color: var(--color-brand-100);
+}
+
+/* Unread row (email specific) */
+.table tbody tr.is-unread {
+  background-color: var(--color-bg-info);
+  font-weight: var(--font-medium);
+}
+
+.table tbody tr.is-unread:hover {
+  background-color: var(--color-info-100);
+}
+
+/* ==========================================================================
+   TABLE VARIANTS
+   ========================================================================== */
+
+/* Striped */
+.table--striped tbody tr:nth-child(even) {
+  background-color: var(--color-bg-tertiary);
+}
+
+/* Bordered */
+.table--bordered td,
+.table--bordered th {
+  border: var(--border-1) solid var(--color-border-secondary);
+}
+
+/* Compact */
+.table--compact th,
+.table--compact td {
+  padding: var(--space-2) var(--space-3);
+}
+
+.table--compact th:first-child,
+.table--compact td:first-child {
+  padding-left: var(--space-4);
+}
+
+.table--compact th:last-child,
+.table--compact td:last-child {
+  padding-right: var(--space-4);
+}
+
+/* Relaxed */
+.table--relaxed th,
+.table--relaxed td {
+  padding: var(--space-4) var(--space-5);
+}
+
+/* ==========================================================================
+   TABLE CELL TYPES
+   ========================================================================== */
+
+/* Checkbox cell */
+.table__checkbox {
+  width: 40px;
+}
+
+/* Actions cell */
+.table__actions {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.table__actions-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-in-out);
+}
+
+.table tbody tr:hover .table__actions-menu {
+  opacity: 1;
+}
+
+/* Truncated cell */
+.table__truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Numeric cell */
+.table__number {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Date cell */
+.table__date {
+  white-space: nowrap;
+  color: var(--color-text-secondary);
+}
+
+/* Status cell */
+.table__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ==========================================================================
+   TABLE FOOTER
+   ========================================================================== */
+
+.table tfoot {
+  background-color: var(--color-bg-tertiary);
+}
+
+.table tfoot td {
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--font-medium);
+  border-bottom: none;
+  border-top: var(--border-1) solid var(--color-border-secondary);
+}
+
+/* ==========================================================================
+   TABLE TOOLBAR
+   ========================================================================== */
+
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: var(--border-1) solid var(--color-border-secondary);
+}
+
+.table-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.table-toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.table-toolbar__selection {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.table-toolbar__selection strong {
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   EMPTY STATE
+   ========================================================================== */
+
+.table__empty {
+  padding: var(--space-12) var(--space-4);
+  text-align: center;
+}
+
+.table__empty-icon {
+  margin: 0 auto var(--space-4);
+  color: var(--color-text-quaternary);
+}
+
+.table__empty-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.table__empty-description {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   LOADING STATE
+   ========================================================================== */
+
+.table.is-loading {
+  position: relative;
+}
+
+.table.is-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-overlay-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE TABLE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .table--responsive thead {
+    display: none;
+  }
+
+  .table--responsive tbody tr {
+    display: block;
+    padding: var(--space-4);
+    border-bottom: var(--border-1) solid var(--color-border-secondary);
+  }
+
+  .table--responsive tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-2) 0;
+    border: none;
+  }
+
+  .table--responsive tbody td::before {
+    content: attr(data-label);
+    font-weight: var(--font-medium);
+    color: var(--color-text-secondary);
+    margin-right: var(--space-4);
+  }
+
+  .table--responsive tbody td:first-child,
+  .table--responsive tbody td:last-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

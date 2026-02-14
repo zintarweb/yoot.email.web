@@ -3,85 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1f2937">
     <title>Yoot Email</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        /* Landing page specific styles */
+        .landing {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
         }
 
-        .container {
+        .landing::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-2%, -2%) rotate(5deg); }
+        }
+
+        .landing__content {
+            position: relative;
+            z-index: 1;
             text-align: center;
-            padding: 2rem;
+            padding: var(--space-8);
+            max-width: 600px;
         }
 
-        .logo {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+        .landing__logo {
+            font-size: 5rem;
+            margin-bottom: var(--space-4);
+            filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.3));
+            animation: pulse-glow 3s ease-in-out infinite;
         }
 
-        h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.1em;
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.3)); }
+            50% { filter: drop-shadow(0 0 50px rgba(59, 130, 246, 0.5)); }
         }
 
-        .tagline {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            margin-bottom: 3rem;
+        .landing__title {
+            font-size: var(--text-5xl);
+            font-weight: var(--font-light);
+            color: var(--color-gray-50);
+            margin-bottom: var(--space-3);
+            letter-spacing: var(--tracking-wide);
         }
 
-        .status {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: #e2e8f0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .landing__tagline {
+            font-size: var(--text-xl);
+            color: var(--color-gray-400);
+            margin-bottom: var(--space-10);
         }
 
-        .login-btn {
-            display: inline-block;
-            padding: 0.875rem 2.5rem;
-            background: #3b82f6;
-            color: #fff;
+        .landing__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-4) var(--space-8);
+            background: var(--gradient-brand);
+            color: var(--color-text-inverse);
             text-decoration: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.2s;
-            border: none;
+            border-radius: var(--radius-full);
+            font-size: var(--text-lg);
+            font-weight: var(--font-medium);
+            transition: all var(--duration-normal) var(--ease-out);
+            box-shadow: var(--shadow-lg), 0 0 30px rgba(59, 130, 246, 0.3);
         }
 
-        .login-btn:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        .landing__cta:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl), 0 0 50px rgba(59, 130, 246, 0.4);
+        }
+
+        .landing__cta:active {
+            transform: translateY(-1px);
+        }
+
+        .landing__cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform var(--duration-fast) var(--ease-out);
+        }
+
+        .landing__cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        .landing__features {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-8);
+            margin-top: var(--space-16);
+            flex-wrap: wrap;
+        }
+
+        .landing__feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--color-gray-400);
+            font-size: var(--text-sm);
+        }
+
+        .landing__feature-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--color-brand-400);
+        }
+
+        /* Theme toggle for landing */
+        .landing__theme-toggle {
+            position: fixed;
+            top: var(--space-6);
+            right: var(--space-6);
+            z-index: 10;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">&#9993;</div>
-        <h1>Yoot Email</h1>
-        <p class="tagline">Email utilities, simplified.</p>
-        <a href="login.html" class="login-btn">Sign In</a>
+    <div class="landing">
+        <!-- Theme Toggle -->
+        <button class="btn btn--ghost btn--icon landing__theme-toggle" onclick="ThemeManager.toggle()" title="Toggle theme">
+            <svg class="theme-icon-light" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+        </button>
+
+        <div class="landing__content">
+            <div class="landing__logo">&#9993;</div>
+            <h1 class="landing__title">Yoot Email</h1>
+            <p class="landing__tagline">Email utilities, simplified.</p>
+
+            <a href="login.html" class="landing__cta">
+                Get Started
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+
+            <div class="landing__features">
+                <div class="landing__feature">
+                    <svg class="landing__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    <span>Smart Filters</span>
+                </div>
+                <div class="landing__feature">
+                    <svg class="landing__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>Spam Protection</span>
+                </div>
+                <div class="landing__feature">
+                    <svg class="landing__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                    <span>Multi-Account</span>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script src="js/theme.js"></script>
 </body>
 </html>

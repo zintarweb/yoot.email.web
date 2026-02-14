@@ -168,6 +168,7 @@ function switchView(viewName) {
         rules: 'Automation Rules',
         lists: 'Email Lists',
         contacts: 'Contacts',
+        analytics: 'Analytics',
     };
     document.getElementById('page-title').textContent = titles[viewName] || viewName;
 

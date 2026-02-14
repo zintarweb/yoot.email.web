@@ -1365,6 +1365,269 @@ body {
     color: var(--success);
 }
 
+/* ==========================================================================
+   DARK MODE OVERRIDES
+   Override hardcoded white backgrounds for dark theme
+   ========================================================================== */
+
+/* Override root variables for dark mode */
+[data-theme="dark"] {
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --bg-light: var(--color-bg-tertiary);
+    --bg-dark: var(--color-bg-primary);
+    --border: var(--color-border-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --text-primary: #ffffff;
+        --text-secondary: #e2e8f0;
+        --bg-light: var(--color-bg-tertiary);
+        --bg-dark: var(--color-bg-primary);
+        --border: var(--color-border-primary);
+    }
+}
+
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .section,
+[data-theme="dark"] .account-card,
+[data-theme="dark"] .email-list,
+[data-theme="dark"] .folder-sidebar,
+[data-theme="dark"] .rule-card,
+[data-theme="dark"] .modal,
+[data-theme="dark"] .notification-dropdown,
+[data-theme="dark"] .sync-progress,
+[data-theme="dark"] .spam-check-panel,
+[data-theme="dark"] .analytics-panel,
+[data-theme="dark"] .bulk-actions-toolbar {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .email-table th,
+[data-theme="dark"] .account-legend,
+[data-theme="dark"] .pagination {
+    background: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .email-table th:hover {
+    background: var(--color-bg-quaternary);
+}
+
+[data-theme="dark"] .email-table tbody tr:hover,
+[data-theme="dark"] .folder-item:hover,
+[data-theme="dark"] .notification-item:hover {
+    background: var(--color-bg-tertiary);
+}
+
+[data-theme="dark"] .email-table tbody tr.unread {
+    background: rgba(37, 99, 235, 0.15);
+}
+
+[data-theme="dark"] .email-table tbody tr.unread:hover {
+    background: rgba(37, 99, 235, 0.25);
+}
+
+[data-theme="dark"] .notification-item.unread {
+    background: rgba(37, 99, 235, 0.15);
+}
+
+[data-theme="dark"] .tab-btn,
+[data-theme="dark"] .pagination-btn,
+[data-theme="dark"] #inbox-account-filter,
+[data-theme="dark"] .user-switcher select,
+[data-theme="dark"] .analytics-controls select,
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select,
+[data-theme="dark"] .form-group textarea,
+[data-theme="dark"] .form-control {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border-primary);
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .tab-btn.active {
+    background: var(--color-brand-600);
+    border-color: var(--color-brand-600);
+}
+
+[data-theme="dark"] .folder-item.active {
+    background: var(--color-brand-600);
+}
+
+[data-theme="dark"] .account-card.needs-reauth {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+[data-theme="dark"] .account-status.synced {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--color-success-300);
+}
+
+[data-theme="dark"] .account-status.syncing {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--color-warning-300);
+}
+
+[data-theme="dark"] .account-status.error {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--color-danger-300);
+}
+
+[data-theme="dark"] .account-status.pending {
+    background: rgba(99, 102, 241, 0.2);
+    color: #a5b4fc;
+}
+
+[data-theme="dark"] .spam-item-status.clean {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--color-success-300);
+}
+
+[data-theme="dark"] .spam-item-status.listed {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--color-danger-300);
+}
+
+[data-theme="dark"] .toggle-slider {
+    background: var(--color-gray-600);
+}
+
+[data-theme="dark"] .toggle-slider:before {
+    background: var(--color-gray-300);
+}
+
+[data-theme="dark"] .folder-item .folder-count {
+    background: var(--color-bg-quaternary);
+    color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .analytics-item.segregated {
+    background: rgba(34, 197, 94, 0.1);
+}
+
+/* Auto dark mode via system preference */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .stat-card,
+    :root:not([data-theme="light"]) .section,
+    :root:not([data-theme="light"]) .account-card,
+    :root:not([data-theme="light"]) .email-list,
+    :root:not([data-theme="light"]) .folder-sidebar,
+    :root:not([data-theme="light"]) .rule-card,
+    :root:not([data-theme="light"]) .modal,
+    :root:not([data-theme="light"]) .notification-dropdown,
+    :root:not([data-theme="light"]) .sync-progress,
+    :root:not([data-theme="light"]) .spam-check-panel,
+    :root:not([data-theme="light"]) .analytics-panel,
+    :root:not([data-theme="light"]) .bulk-actions-toolbar {
+        background: var(--color-bg-secondary);
+        border-color: var(--color-border-primary);
+    }
+
+    :root:not([data-theme="light"]) .email-table th,
+    :root:not([data-theme="light"]) .account-legend,
+    :root:not([data-theme="light"]) .pagination {
+        background: var(--color-bg-tertiary);
+    }
+
+    :root:not([data-theme="light"]) .email-table th:hover {
+        background: var(--color-bg-quaternary);
+    }
+
+    :root:not([data-theme="light"]) .email-table tbody tr:hover,
+    :root:not([data-theme="light"]) .folder-item:hover,
+    :root:not([data-theme="light"]) .notification-item:hover {
+        background: var(--color-bg-tertiary);
+    }
+
+    :root:not([data-theme="light"]) .email-table tbody tr.unread {
+        background: rgba(37, 99, 235, 0.15);
+    }
+
+    :root:not([data-theme="light"]) .email-table tbody tr.unread:hover {
+        background: rgba(37, 99, 235, 0.25);
+    }
+
+    :root:not([data-theme="light"]) .notification-item.unread {
+        background: rgba(37, 99, 235, 0.15);
+    }
+
+    :root:not([data-theme="light"]) .tab-btn,
+    :root:not([data-theme="light"]) .pagination-btn,
+    :root:not([data-theme="light"]) #inbox-account-filter,
+    :root:not([data-theme="light"]) .user-switcher select,
+    :root:not([data-theme="light"]) .analytics-controls select,
+    :root:not([data-theme="light"]) .form-group input,
+    :root:not([data-theme="light"]) .form-group select,
+    :root:not([data-theme="light"]) .form-group textarea,
+    :root:not([data-theme="light"]) .form-control {
+        background: var(--color-bg-tertiary);
+        border-color: var(--color-border-primary);
+        color: var(--color-text-primary);
+    }
+
+    :root:not([data-theme="light"]) .tab-btn.active {
+        background: var(--color-brand-600);
+        border-color: var(--color-brand-600);
+    }
+
+    :root:not([data-theme="light"]) .folder-item.active {
+        background: var(--color-brand-600);
+    }
+
+    :root:not([data-theme="light"]) .account-card.needs-reauth {
+        background: rgba(239, 68, 68, 0.15);
+    }
+
+    :root:not([data-theme="light"]) .account-status.synced {
+        background: rgba(34, 197, 94, 0.2);
+        color: var(--color-success-300);
+    }
+
+    :root:not([data-theme="light"]) .account-status.syncing {
+        background: rgba(245, 158, 11, 0.2);
+        color: var(--color-warning-300);
+    }
+
+    :root:not([data-theme="light"]) .account-status.error {
+        background: rgba(239, 68, 68, 0.2);
+        color: var(--color-danger-300);
+    }
+
+    :root:not([data-theme="light"]) .account-status.pending {
+        background: rgba(99, 102, 241, 0.2);
+        color: #a5b4fc;
+    }
+
+    :root:not([data-theme="light"]) .spam-item-status.clean {
+        background: rgba(34, 197, 94, 0.2);
+        color: var(--color-success-300);
+    }
+
+    :root:not([data-theme="light"]) .spam-item-status.listed {
+        background: rgba(239, 68, 68, 0.2);
+        color: var(--color-danger-300);
+    }
+
+    :root:not([data-theme="light"]) .toggle-slider {
+        background: var(--color-gray-600);
+    }
+
+    :root:not([data-theme="light"]) .toggle-slider:before {
+        background: var(--color-gray-300);
+    }
+
+    :root:not([data-theme="light"]) .folder-item .folder-count {
+        background: var(--color-bg-quaternary);
+        color: var(--color-text-secondary);
+    }
+
+    :root:not([data-theme="light"]) .analytics-item.segregated {
+        background: rgba(34, 197, 94, 0.1);
+    }
+}
+
 /* Global Sync Indicator */
 .global-sync-indicator {
     display: flex;

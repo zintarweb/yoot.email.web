@@ -1,0 +1,267 @@
+/**
+ * Toggle Component
+ *
+ * Toggle switches and segmented controls
+ */
+
+/* ==========================================================================
+   TOGGLE (Alias for switch - using same styles)
+   ========================================================================== */
+
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle__track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background-color: var(--color-gray-300);
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-normal) var(--ease-in-out);
+}
+
+.toggle__thumb {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+/* Hover */
+.toggle:hover .toggle__track {
+  background-color: var(--color-gray-400);
+}
+
+/* Focus */
+.toggle__input:focus + .toggle__track {
+  box-shadow: var(--shadow-focus);
+}
+
+/* Checked */
+.toggle__input:checked + .toggle__track {
+  background-color: var(--color-brand-600);
+}
+
+.toggle__input:checked + .toggle__track .toggle__thumb {
+  transform: translateX(20px);
+}
+
+/* Disabled */
+.toggle__input:disabled + .toggle__track {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle__input:disabled ~ .toggle__label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Label */
+.toggle__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   TOGGLE WITH ICONS
+   ========================================================================== */
+
+.toggle--with-icons .toggle__track {
+  width: 56px;
+}
+
+.toggle--with-icons .toggle__input:checked + .toggle__track .toggle__thumb {
+  transform: translateX(32px);
+}
+
+.toggle__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-inverse);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.toggle__icon--off {
+  right: 6px;
+}
+
+.toggle__icon--on {
+  left: 6px;
+  opacity: 0;
+}
+
+.toggle__input:checked + .toggle__track .toggle__icon--off {
+  opacity: 0;
+}
+
+.toggle__input:checked + .toggle__track .toggle__icon--on {
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   SEGMENTED CONTROL
+   ========================================================================== */
+
+.segmented {
+  display: inline-flex;
+  padding: var(--space-1);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+  gap: var(--space-1);
+}
+
+.segmented__item {
+  position: relative;
+}
+
+.segmented__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.segmented__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  padding: var(--space-1-5) var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  background-color: transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-button);
+  white-space: nowrap;
+}
+
+.segmented__label:hover {
+  color: var(--color-text-primary);
+}
+
+.segmented__input:checked + .segmented__label {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.segmented__input:focus + .segmented__label {
+  box-shadow: var(--shadow-focus);
+}
+
+.segmented__input:disabled + .segmented__label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   SEGMENTED SIZES
+   ========================================================================== */
+
+.segmented--sm .segmented__label {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--text-xs);
+}
+
+.segmented--lg .segmented__label {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-base);
+}
+
+/* ==========================================================================
+   SEGMENTED FULL WIDTH
+   ========================================================================== */
+
+.segmented--block {
+  display: flex;
+  width: 100%;
+}
+
+.segmented--block .segmented__item {
+  flex: 1;
+}
+
+.segmented--block .segmented__label {
+  width: 100%;
+}
+
+/* ==========================================================================
+   TOGGLE BUTTONS (Button group variant)
+   ========================================================================== */
+
+.toggle-buttons {
+  display: inline-flex;
+  border: var(--border-1) solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.toggle-buttons__item {
+  position: relative;
+}
+
+.toggle-buttons__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-buttons__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-secondary);
+  border-right: var(--border-1) solid var(--color-border-primary);
+  cursor: pointer;
+  transition: var(--transition-button);
+  white-space: nowrap;
+}
+
+.toggle-buttons__item:last-child .toggle-buttons__label {
+  border-right: none;
+}
+
+.toggle-buttons__label:hover {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.toggle-buttons__input:checked + .toggle-buttons__label {
+  background-color: var(--color-brand-600);
+  color: var(--color-text-inverse);
+  border-color: var(--color-brand-600);
+}
+
+.toggle-buttons__input:focus + .toggle-buttons__label {
+  z-index: 1;
+  box-shadow: var(--shadow-focus);
+}

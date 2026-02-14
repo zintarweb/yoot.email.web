@@ -1,0 +1,271 @@
+/**
+ * Container Layout
+ *
+ * Content containers and section layouts
+ */
+
+/* ==========================================================================
+   CONTAINER
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-page-gutter);
+  padding-right: var(--space-page-gutter);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--space-page-gutter-md);
+    padding-right: var(--space-page-gutter-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--space-page-gutter-lg);
+    padding-right: var(--space-page-gutter-lg);
+  }
+}
+
+/* Container sizes */
+.container--narrow {
+  max-width: var(--content-max-width-narrow);
+}
+
+.container--wide {
+  max-width: var(--content-max-width-wide);
+}
+
+.container--full {
+  max-width: none;
+}
+
+/* Container without padding */
+.container--flush {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ==========================================================================
+   SECTION
+   ========================================================================== */
+
+.section {
+  padding: var(--space-section-md) 0;
+}
+
+.section--sm {
+  padding: var(--space-section-sm) 0;
+}
+
+.section--lg {
+  padding: var(--space-section-lg) 0;
+}
+
+.section--xl {
+  padding: var(--space-section-xl) 0;
+}
+
+/* ==========================================================================
+   FLEX LAYOUT
+   ========================================================================== */
+
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+/* Flex direction */
+.flex-row { flex-direction: row; }
+.flex-row-reverse { flex-direction: row-reverse; }
+.flex-col { flex-direction: column; }
+.flex-col-reverse { flex-direction: column-reverse; }
+
+/* Flex wrap */
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-wrap-reverse { flex-wrap: wrap-reverse; }
+
+/* Flex grow/shrink */
+.flex-1 { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-initial { flex: 0 1 auto; }
+.flex-none { flex: none; }
+
+.grow { flex-grow: 1; }
+.grow-0 { flex-grow: 0; }
+
+.shrink { flex-shrink: 1; }
+.shrink-0 { flex-shrink: 0; }
+
+/* Align items */
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.items-baseline { align-items: baseline; }
+.items-stretch { align-items: stretch; }
+
+/* Justify content */
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+/* Align self */
+.self-auto { align-self: auto; }
+.self-start { align-self: flex-start; }
+.self-center { align-self: center; }
+.self-end { align-self: flex-end; }
+.self-stretch { align-self: stretch; }
+
+/* ==========================================================================
+   STACK (Vertical spacing)
+   ========================================================================== */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.stack--xs > * + * { margin-top: var(--space-1); }
+.stack--sm > * + * { margin-top: var(--space-2); }
+.stack--md > * + * { margin-top: var(--space-4); }
+.stack--lg > * + * { margin-top: var(--space-6); }
+.stack--xl > * + * { margin-top: var(--space-8); }
+
+/* ==========================================================================
+   CLUSTER (Horizontal wrapping)
+   ========================================================================== */
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.cluster--xs { gap: var(--space-1); }
+.cluster--sm { gap: var(--space-2); }
+.cluster--md { gap: var(--space-4); }
+.cluster--lg { gap: var(--space-6); }
+
+/* ==========================================================================
+   SPLIT (Two-column with space between)
+   ========================================================================== */
+
+.split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.split--start {
+  align-items: flex-start;
+}
+
+.split--end {
+  align-items: flex-end;
+}
+
+/* ==========================================================================
+   CENTER
+   ========================================================================== */
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* ==========================================================================
+   SIDEBAR LAYOUT
+   ========================================================================== */
+
+.with-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.with-sidebar > :first-child {
+  flex-basis: 240px;
+  flex-grow: 1;
+}
+
+.with-sidebar > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 50%;
+}
+
+/* ==========================================================================
+   ASPECT RATIO
+   ========================================================================== */
+
+.aspect-square { aspect-ratio: 1 / 1; }
+.aspect-video { aspect-ratio: 16 / 9; }
+.aspect-photo { aspect-ratio: 4 / 3; }
+.aspect-portrait { aspect-ratio: 3 / 4; }
+
+/* ==========================================================================
+   OVERFLOW
+   ========================================================================== */
+
+.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden; }
+.overflow-visible { overflow: visible; }
+.overflow-scroll { overflow: scroll; }
+
+.overflow-x-auto { overflow-x: auto; }
+.overflow-x-hidden { overflow-x: hidden; }
+.overflow-x-scroll { overflow-x: scroll; }
+
+.overflow-y-auto { overflow-y: auto; }
+.overflow-y-hidden { overflow-y: hidden; }
+.overflow-y-scroll { overflow-y: scroll; }
+
+/* ==========================================================================
+   POSITION
+   ========================================================================== */
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+.static { position: static; }
+
+/* Inset */
+.inset-0 { inset: 0; }
+.top-0 { top: 0; }
+.right-0 { right: 0; }
+.bottom-0 { bottom: 0; }
+.left-0 { left: 0; }
+
+/* ==========================================================================
+   Z-INDEX
+   ========================================================================== */
+
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.z-40 { z-index: 40; }
+.z-50 { z-index: 50; }
+.z-auto { z-index: auto; }

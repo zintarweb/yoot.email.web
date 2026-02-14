@@ -1,0 +1,415 @@
+/**
+ * Micro-Interactions
+ *
+ * Enhanced interactive states and animations for UI elements
+ */
+
+/* ==========================================================================
+   HOVER LIFT EFFECTS
+   ========================================================================== */
+
+.hover-lift {
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.hover-lift:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Subtle lift for cards */
+.hover-lift--subtle:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Large lift for buttons */
+.hover-lift--large:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==========================================================================
+   HOVER SCALE EFFECTS
+   ========================================================================== */
+
+.hover-scale {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-scale:active {
+  transform: scale(0.98);
+}
+
+/* Icon scale */
+.hover-scale-icon {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.hover-scale-icon:hover {
+  transform: scale(1.1);
+}
+
+.hover-scale-icon:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   HOVER GLOW EFFECTS
+   ========================================================================== */
+
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.hover-glow:hover {
+  box-shadow:
+    var(--shadow-md),
+    0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+.hover-glow--brand:hover {
+  box-shadow:
+    var(--shadow-md),
+    0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.hover-glow--success:hover {
+  box-shadow:
+    var(--shadow-md),
+    0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+.hover-glow--danger:hover {
+  box-shadow:
+    var(--shadow-md),
+    0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+/* ==========================================================================
+   FOCUS EFFECTS
+   ========================================================================== */
+
+.focus-ring {
+  transition: box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.focus-ring--inset:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--color-brand-500);
+}
+
+/* Animated focus ring */
+.focus-ring--animated:focus-visible {
+  animation: focusPulse 0.3s ease-out;
+  box-shadow: var(--shadow-focus);
+}
+
+@keyframes focusPulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--color-brand-200);
+  }
+  100% {
+    box-shadow: var(--shadow-focus);
+  }
+}
+
+/* ==========================================================================
+   CLICK RIPPLE EFFECT
+   ========================================================================== */
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 10%, transparent 10%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition:
+    transform 0.5s ease-out,
+    opacity 0.5s ease-out;
+}
+
+.ripple:active::after {
+  transform: scale(0, 0);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Dark ripple for light backgrounds */
+.ripple--dark::after {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.15) 10%, transparent 10%);
+}
+
+/* ==========================================================================
+   TOGGLE ANIMATIONS
+   ========================================================================== */
+
+.toggle-rotate {
+  transition: transform var(--duration-normal) var(--ease-in-out);
+}
+
+.toggle-rotate.is-active {
+  transform: rotate(180deg);
+}
+
+.toggle-rotate-90.is-active {
+  transform: rotate(90deg);
+}
+
+.toggle-rotate-45.is-active {
+  transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   EXPAND/COLLAPSE ANIMATIONS
+   ========================================================================== */
+
+.expand-collapse {
+  overflow: hidden;
+  transition:
+    max-height var(--duration-normal) var(--ease-in-out),
+    opacity var(--duration-normal) var(--ease-in-out);
+  max-height: 0;
+  opacity: 0;
+}
+
+.expand-collapse.is-expanded {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+/* Grid-based height animation */
+.expand-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-normal) var(--ease-in-out);
+}
+
+.expand-grid.is-expanded {
+  grid-template-rows: 1fr;
+}
+
+.expand-grid > * {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   SLIDE ANIMATIONS
+   ========================================================================== */
+
+.slide-left {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+.slide-left.is-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-right {
+  transform: translateX(100%);
+  opacity: 0;
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+.slide-right.is-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-up {
+  transform: translateY(20px);
+  opacity: 0;
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+.slide-up.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-down {
+  transform: translateY(-20px);
+  opacity: 0;
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+.slide-down.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   SHAKE ANIMATION (for errors)
+   ========================================================================== */
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+/* ==========================================================================
+   BOUNCE ANIMATION (for attention)
+   ========================================================================== */
+
+.bounce {
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+/* ==========================================================================
+   SUCCESS CHECK ANIMATION
+   ========================================================================== */
+
+.success-check {
+  animation: successScale 0.4s ease-out;
+}
+
+@keyframes successScale {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   COUNTER/NUMBER ANIMATION
+   ========================================================================== */
+
+.count-up {
+  animation: countPulse 0.3s ease-out;
+}
+
+@keyframes countPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+    color: var(--color-brand-500);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   LOADING DOTS
+   ========================================================================== */
+
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation: loadingDots 1.4s infinite both;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loadingDots {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift,
+  .hover-scale,
+  .hover-scale-icon,
+  .toggle-rotate,
+  .expand-collapse,
+  .expand-grid,
+  .slide-left,
+  .slide-right,
+  .slide-up,
+  .slide-down {
+    transition: none;
+  }
+
+  .shake,
+  .bounce,
+  .success-check,
+  .count-up,
+  .loading-dots span {
+    animation: none;
+  }
+
+  .ripple::after {
+    display: none;
+  }
+}
